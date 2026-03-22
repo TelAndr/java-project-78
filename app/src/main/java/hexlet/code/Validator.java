@@ -1,7 +1,8 @@
 package hexlet.code;
 
 public class Validator {
-    public void string() {
-        //
+    public StringSchema string() {
+        return new StringSchema();
     }
+    public NumberSchema number() { return new NumberSchema(); }
 }

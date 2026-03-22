@@ -1,5 +1,26 @@
 plugins {
     id("java")
+    id("application")
+    id ("checkstyle")
+    id("org.sonarqube") version "6.2.0.5505"
+    id("jacoco")
+}
+
+sonar {
+    properties {
+        property("sonar.projectKey", "TelAndr_java-project-71")
+        property("sonar.organization", "telandr1987")
+        property("sonar.host.url", "https://sonarcloud.io")
+    }
+}
+
+sonarqube {
+    properties {
+        property ("sonar.projectKey", "TelAndr_java-project-71")
+        property ("sonar.host.url", "https://sonarcloud.io")
+        property ("sonar.login", "${System.getenv("SONAR_TOKEN")}") // Используйте переменную окружения для вашего токена
+        property ("sonar.coverage.jacoco.xmlReportPaths", file("build/reports/jacoco/test/jacocoTestReport.xml"))
+    }
 }
 
 group = "hexlet.code"
@@ -9,7 +30,14 @@ repositories {
     mavenCentral()
 }
 
+application {
+    // Входная точка
+    mainClass.set("hexlet.code.App")
+}
+
 dependencies {
+    implementation("org.projectlombok:lombok:1.18.26")
+    implementation("org.testng:testng:7.1.0")
     testImplementation(platform("org.junit:junit-bom:5.9.1"))
     testImplementation("org.junit.jupiter:junit-jupiter")
 }
