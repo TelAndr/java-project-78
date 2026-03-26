@@ -10,7 +10,8 @@ public class StringSchema extends BaseSchema<String> {
     protected String cast(Object value) {
         if (value instanceof String) {
             return (String) value;
-        } throw new ClassCastException("Value is not a String");
+        }
+        throw new ClassCastException("Value is not a String");
     }
     public StringSchema required() {
         isRunRequired = true;
