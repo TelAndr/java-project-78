@@ -8,17 +8,36 @@ public class StringSchema extends BaseSchema<String> {
 
     @Override
     protected String cast(Object value) {
+        /**
+         * Преобразует тип выходного значения в строковый тип.
+         * Этот метод может быть переопределен в подклассах для изменения поведения.
+         *
+         * @return значение строкового типа.
+         */
         if (value instanceof String) {
             return (String) value;
         }
         throw new ClassCastException("Value is not a String");
     }
     public StringSchema required() {
+        /**
+         * добавляет в схему ограничение, которое не позволяет использовать null в качестве значения
+         * Этот метод может быть переопределен в подклассах для изменения поведения.
+         *
+         * @return значение типа исходного класса.
+         */
         isRunRequired = true;
         isRequired = true;
         return this;
     }
     public StringSchema minLength(int valMinLength) {
+        /**
+         * добавляет в схему ограничение минимальной длины для строки.
+         * Строка должна быть равна или длиннее указанного числа
+         * Этот метод может быть переопределен в подклассах для изменения поведения.
+         *
+         * @return значение типа исходного класса.
+         */
         isRunMinLength = true;
         this.curValMinLength = valMinLength;
         isGreaterMinLength = true;
