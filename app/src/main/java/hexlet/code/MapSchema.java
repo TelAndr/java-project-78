@@ -5,6 +5,12 @@ import java.util.HashMap;
 
 public class MapSchema<T> {
     public MapSchema required() {
+        /**
+         * добавляет в схему ограничение, которое не позволяет использовать null в качестве значения
+         * Этот метод может быть переопределен в подклассах для изменения поведения.
+         *
+         * @return значение типа исходного класса.
+         */
         isRunRequired = true;
         isRequired = true;
         return this;
