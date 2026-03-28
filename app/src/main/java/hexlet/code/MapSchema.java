@@ -16,11 +16,23 @@ public class MapSchema<T> {
         return this;
     }
     public MapSchema sizeof(int size) {
+        /**
+         * добавляет ограничение на размер мапы. Количество пар ключ-значений в объекте Map должно быть равно заданному
+         * Этот метод может быть переопределен в подклассах для изменения поведения.
+         *
+         * @return значение типа исходного класса.
+         */
         isRunSizeof = true;
         this.curValSizeMap = size;
         return this;
     }
     public MapSchema shape(Map<T, BaseSchema<T>> mapSchemas) {
+        /**
+         * позволяет описывать валидацию для значений каждого ключа объекта Map
+         * Этот метод может быть переопределен в подклассах для изменения поведения.
+         *
+         * @return значение типа исходного класса.
+         */
         this.propertySchemas.putAll(mapSchemas);
         return this;
     }
