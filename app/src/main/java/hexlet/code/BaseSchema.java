@@ -1,7 +1,25 @@
 package hexlet.code;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
+import java.util.function.Predicate;
+
 public abstract class BaseSchema<T> {
+    Predicate<String> notEmpty = s -> s != null && !s.isEmpty();
+    //Predicate<String> isRequired = curString -> (curString == null || curString.isEmpty());
+    //Predicate<String> minLength = s -> (s.length() < curValMinLength);
+    Predicate<Integer> positive = x -> x > 0;
+    public Predicate<String> detectMinLength(int minLen) {
+        return s -> s.length() > minLen;
+    }
+    protected Map<String, Predicate<T>> checks = new HashMap<>();
+    protected boolean required = false;
+
+    protected final void addCheck(String name, Predicate<T> validate) {
+        checks.put(name, validate);
+    }
+
     protected T castValue(Object value) {
         return null;
     }
