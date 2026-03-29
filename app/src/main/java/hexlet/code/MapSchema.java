@@ -19,6 +19,7 @@ public class MapSchema<T> {
      * добавляет ограничение на размер мапы. Количество пар ключ-значений в объекте Map должно быть равно заданному
      * Этот метод может быть переопределен в подклассах для изменения поведения.
      *
+     * @param size размер Map
      * @return значение типа исходного класса.
      */
     public MapSchema sizeof(int size) {
@@ -30,12 +31,20 @@ public class MapSchema<T> {
      * позволяет описывать валидацию для значений каждого ключа объекта Map
      * Этот метод может быть переопределен в подклассах для изменения поведения.
      *
+     * @param mapSchemas входной Map для задания схемы валидации входного значения
      * @return значение типа исходного класса.
      */
     public MapSchema shape(Map<T, BaseSchema<T>> mapSchemas) {
         this.propertySchemas.putAll(mapSchemas);
         return this;
     }
+    /**
+     * выполняет проверки по сохранённым параметрам и возвращал true или false.
+     * Этот метод может быть переопределен в подклассах для изменения поведения.
+     *
+     * @param curMap входной Map для проверки валидности ключей и значений
+     * @return значение типа исходного класса.
+     */
     public boolean validate(Map curMap) {
         boolean result = true;
         if (isRequired && (curMap == null || curMap.isEmpty())) {
@@ -46,6 +55,13 @@ public class MapSchema<T> {
         }
         return result;
     }
+    /**
+     * принимает значение для проверки или использует уже введённое.
+     * Этот метод может быть переопределен в подклассах для изменения поведения.
+     *
+     * @param input входной объект для проверки валидности
+     * @return значение типа исходного класса.
+     */
     public boolean isValid(Object input) {
         if (input == null) {
             // Если верхний Map не обязателен — возвращаем true
