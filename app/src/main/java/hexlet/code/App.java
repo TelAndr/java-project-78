@@ -9,12 +9,15 @@ public class App {
     public static void main(String[] args) {
         // Press Alt+Enter with your caret at the highlighted text to see how
         // IntelliJ IDEA suggests fixing it.
+        int valMinLength = 5;
+        int ageValuePerson = 20;
+        int ageValueBadPerson = 17;
         System.out.printf("Hello git and welcome!");
         // Создаем валидатор
         hexlet.code.Validator validator = new hexlet.code.Validator();
 
         // Создаем схему для строки с минимальной длиной 5 и обязательным полем
-        var stringSchema = validator.string().required().minLength(5);
+        var stringSchema = validator.string().required().minLength(valMinLength);
 
         // Проверка данных: правильная
         System.out.println(stringSchema.isValid("hello")); // true
@@ -41,13 +44,13 @@ public class App {
         // Тестовые объекты
         Map<String, Object> person = new HashMap<>();
         person.put("name", "Alex");
-        person.put("age", 20);
+        person.put("age", ageValuePerson);
 
         System.out.println(mapSchema.isValid(person)); // true
 
         Map<String, Object> badPerson = new HashMap<>();
         badPerson.put("name", "Al");
-        badPerson.put("age", 17);
+        badPerson.put("age", ageValueBadPerson);
 
         System.out.println(mapSchema.isValid(badPerson)); // false
     }
