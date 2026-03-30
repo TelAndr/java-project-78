@@ -9,9 +9,11 @@ public class App {
     public static void main(String[] args) {
         // Press Alt+Enter with your caret at the highlighted text to see how
         // IntelliJ IDEA suggests fixing it.
-        int valMinLength = 5;
-        int ageValuePerson = 20;
-        int ageValueBadPerson = 17;
+        final int valMinLength = 5;
+        final int ageValuePerson = 20;
+        final int ageValueBadPerson = 17;
+        final int minAge = 18;
+        final int maxAge = 100;
         System.out.printf("Hello git and welcome!");
         // Создаем валидатор
         hexlet.code.Validator validator = new hexlet.code.Validator();
@@ -34,8 +36,6 @@ public class App {
         // Настраиваем схему Map с shape()
         Map<String, BaseSchema<String>> schemaString = new HashMap<>();
         Map<String, BaseSchema<Integer>> schemaInteger = new HashMap<>();
-        int minAge = 18;
-        int maxAge = 100;
         schemaString.put("name", validator.string().required());
         schemaInteger.put("age", validator.number().range(minAge, maxAge));
 
