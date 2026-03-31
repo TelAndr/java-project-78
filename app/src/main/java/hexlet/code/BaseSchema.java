@@ -6,15 +6,37 @@ import java.util.Scanner;
 import java.util.function.Predicate;
 
 public abstract class BaseSchema<T> {
+    /**
+     * определяет является ли строка непустой или ненулевой
+     *
+     * @return определяет значение предиката
+     */
     public Predicate<String> detectNotEmpty() {
         return s -> s != null && !s.isEmpty();
     }
+    /**
+     *
+     * проверяет на нулевое значение и на пустоту
+     *
+     * @return определяет значение предиката
+     */
     public Predicate<String> detectRequired() {
         return s -> (s == null || s.isEmpty());
     }
+    /**
+     * проверяет на соответствие минимальной длины строки
+     *
+     * @param minLen значение минимальной длины
+     * @return определяет значение предиката
+     */
     public Predicate<String> detectMinLength(int minLen) {
         return s -> s.length() > minLen;
     }
+    /**
+     * проверяет на соответствие положительному значению числа
+     *
+     * @return определяет значение предиката
+     */
     public Predicate<Integer> detectPositive() {
         return x -> x > 0;
     }
