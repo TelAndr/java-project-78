@@ -6,12 +6,17 @@ import java.util.Scanner;
 import java.util.function.Predicate;
 
 public abstract class BaseSchema<T> {
-    Predicate<String> notEmpty = s -> s != null && !s.isEmpty();
-    //Predicate<String> isRequired = curString -> (curString == null || curString.isEmpty());
-    //Predicate<String> minLength = s -> (s.length() < curValMinLength);
-    Predicate<Integer> positive = x -> x > 0;
+    public Predicate<String> detectNotEmpty() {
+        return s -> s != null && !s.isEmpty();
+    }
+    public Predicate<String> detectRequired() {
+        return s -> (s == null || s.isEmpty());
+    }
     public Predicate<String> detectMinLength(int minLen) {
         return s -> s.length() > minLen;
+    }
+    public Predicate<Integer> detectPositive() {
+        return x -> x > 0;
     }
     protected Map<String, Predicate<T>> checks = new HashMap<>();
     protected boolean required = false;
