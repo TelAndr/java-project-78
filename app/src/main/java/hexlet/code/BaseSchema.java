@@ -40,17 +40,33 @@ public abstract class BaseSchema<T> {
     public Predicate<Integer> detectPositive() {
         return x -> x > 0;
     }
-    protected Map<String, Predicate<T>> checks = new HashMap<>();
-    protected boolean required = false;
+    private Map<String, Predicate<T>> checks = new HashMap<>();
+    Map<String, Predicate<T>> getChecks() {
+        return checks;
+    }
+    private boolean required = false;
+    boolean getValueRequired() {
+        return required;
+    }
 
     protected final void addCheck(String name, Predicate<T> validate) {
         checks.put(name, validate);
     }
-
+    /**
+     * преобразует переданный объект value в тип T.
+     *
+     * @param value преобразуемое значение
+     * @return возвращает результат преобразования в конкретный тип
+     */
     protected T castValue(Object value) {
         return null;
     }
-
+    /**
+     * выполняет проверки по сохранённым параметрам и возвращает true или false.
+     *
+     * @param value преобразуемое значение
+     * @return возвращает результат проверки
+     */
     protected boolean validate(T value) {
         return false;
     }
