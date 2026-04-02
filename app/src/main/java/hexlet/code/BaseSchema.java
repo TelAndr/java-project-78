@@ -41,14 +41,30 @@ public abstract class BaseSchema<T> {
         return x -> x > 0;
     }
     private Map<String, Predicate<T>> checks = new HashMap<>();
+    /**
+     * делает возможным использование Map<String, Predicate<T>> checks извне класса BaseSchema<T>.
+     *
+     * @return возвращает значение Map<String, Predicate<T>> checks
+     */
     Map<String, Predicate<T>> getChecks() {
         return checks;
     }
     private boolean required = false;
+    /**
+     * делает возможным использование required извне класса BaseSchema<T>.
+     *
+     * @return возвращает значение required
+     */
     boolean getValueRequired() {
         return required;
     }
-
+    /**
+     * добавляет проверку с конкретным названием и конкретный предикат.
+     *
+     * @param name название проверки
+     * @param validate конкретный предикат
+     * @return создает Map<String, Predicate<T>> checks c ключём name и значением validate
+     */
     protected final void addCheck(String name, Predicate<T> validate) {
         checks.put(name, validate);
     }
@@ -74,6 +90,11 @@ public abstract class BaseSchema<T> {
     public BaseSchema(Class<T> type) {
         this.type = type;
     }
+    /**
+     * читает значение из консольного ввода и определяет его тип.
+     *
+     * @return возвращает тип значения из консольного ввода
+     */
     public T readInput() {
         if (type == String.class) {
             return type.cast(scanner.nextLine());
@@ -87,6 +108,12 @@ public abstract class BaseSchema<T> {
             throw new IllegalArgumentException("Тип не поддерживается: " + type);
         }
     }
+    /**
+     * принимает значение для проверки или использует уже введённое.
+     *
+     * @param value входное значение
+     * @return возвращает результат проверки валидации
+     */
     public boolean isValid(Object value) {
         try {
             T castedValue = castValue(curValue);
