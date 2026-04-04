@@ -63,7 +63,6 @@ public abstract class BaseSchema<T> {
      *
      * @param name название проверки
      * @param validate конкретный предикат
-     * @return создает Map<String, Predicate<T>> checks c ключём name и значением validate
      */
     protected final void addCheck(String name, Predicate<T> validate) {
         checks.put(name, validate);
