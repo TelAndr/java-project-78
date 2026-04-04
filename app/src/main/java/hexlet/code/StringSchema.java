@@ -56,6 +56,12 @@ public class StringSchema extends BaseSchema<String> {
         isCurContains = true;
         return this;
     }
+    /**
+     * выполняет проверки по сохранённым параметрам и возвращает true или false.
+     *
+     * @param curString преобразуемое значение
+     * @return возвращает результат проверки
+     */
     @Override
     protected boolean validate(String curString) {
         boolean result = true;
@@ -83,6 +89,12 @@ public class StringSchema extends BaseSchema<String> {
     //        }
     //    }
     //}
+    /**
+     * принимает значение для проверки или использует уже введённое.
+     *
+     * @param value входное значение
+     * @return возвращает результат проверки валидации
+     */
     @Override
     public boolean isValid(Object value) {
         if (value == null) {
@@ -93,7 +105,7 @@ public class StringSchema extends BaseSchema<String> {
         }
         return validate((String) value);
     }
-    private String curString;
+    //private String curString;
     private int curValMinLength;
     private String innerSubstring;
     private boolean isRequired;
