@@ -62,7 +62,7 @@ public abstract class BaseSchema<T> {
      * добавляет проверку с конкретным названием и конкретный предикат.
      *
      * @param name название проверки
-     * @param validate конкретный предикат
+     * @param validate конкретны
      */
     protected final void addCheck(String name, Predicate<T> validate) {
         checks.put(name, validate);
