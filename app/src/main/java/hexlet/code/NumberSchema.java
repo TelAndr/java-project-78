@@ -67,7 +67,7 @@ public class NumberSchema extends BaseSchema<Integer> {
     protected boolean validate(Integer curNumber) {
         boolean result = true;
         Integer val = curNumber.intValue();
-        if (isRequired && ((curNumber == null) )) {
+        if (isRequired && ((curNumber == null))) {
             result = false;
         }
         if (isPositive &&  (val <= 0)) {
