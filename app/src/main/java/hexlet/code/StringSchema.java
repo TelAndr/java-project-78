@@ -34,6 +34,7 @@ public class StringSchema extends BaseSchema<String> {
      * Строка должна быть равна или длиннее указанного числа
      * Этот метод может быть пcastереопределен в подклассах для изменения поведения.
      *
+     * @param valMinLength минимальное значение длины строки
      * @return значение типа исходного класса.
      */
     public StringSchema minLength(int valMinLength) {
@@ -42,6 +43,13 @@ public class StringSchema extends BaseSchema<String> {
         isGreaterMinLength = true;
         return this;
     }
+    /**
+     * добавляет в схему ограничение для проверки вхождения исходной подстроки в строку.
+     * Этот метод может быть переопределен в подклассах для изменения поведения.
+     *
+     * @param curSubstring строковое значение подстроки
+     * @return значение типа исходного класса.
+     */
     public StringSchema contains(String curSubstring) {
         isRunContains = true;
         this.innerSubstring = curSubstring;
