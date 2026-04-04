@@ -6,6 +6,12 @@ public class NumberSchema extends BaseSchema<Integer> {
         super(type);
     }
 
+    /**
+     * преобразует переданный объект value в тип Integer.
+     *
+     * @param value преобразуемое значение
+     * @return возвращает результат преобразования в тип Integer
+     */
     @Override
     protected Integer cast(Object value) {
         if (value instanceof Integer) {
@@ -13,16 +19,37 @@ public class NumberSchema extends BaseSchema<Integer> {
         }
         throw new ClassCastException("Value is not a Number");
     }
+    /**
+     * добавляет в схему ограничение, которое не позволяет использовать null в качестве значения
+     * Этот метод может быть переопределен в подклассах для изменения поведения.
+     *
+     * @return значение типа исходного класса.
+     */
     public NumberSchema required() {
         isRunRequired = true;
         isRequired = true;
         return this;
     }
+    /**
+     * добавляет в схему ограничение, которое позволяет использовать только положительные числа в качестве значения
+     * Этот метод может быть переопределен в подклассах для изменения поведения.
+     *
+     * @return значение типа исходного класса.
+     */
     public NumberSchema positive() {
         isRunPositive = true;
         isPositive = true;
         return this;
     }
+    /**
+     * добавляет в схему ограничение, которое позволяет использовать только в диапазоне от lowerRange до upperRange
+     * числа в качестве значения
+     * Этот метод может быть переопределен в подклассах для изменения поведения.
+     *
+     * @param lowerRange минимальное значение для прохождения валидации
+     * @param upperRange максимальное значение для прохождения валидации
+     * @return значение типа исходного класса.
+     */
     public  NumberSchema range(int lowerRange, int upperRange) {
         isRunRange = true;
         this.curLowerRange = lowerRange;
@@ -30,6 +57,12 @@ public class NumberSchema extends BaseSchema<Integer> {
         isFallsWithinRange = true;
         return this;
     }
+    /**
+     * выполняет проверки по сохранённым параметрам и возвращает true или false.
+     *
+     * @param curNumber преобразуемое значение
+     * @return возвращает результат проверки
+     */
     @Override
     protected boolean validate(Integer curNumber) {
         boolean result = true;
@@ -58,6 +91,12 @@ public class NumberSchema extends BaseSchema<Integer> {
     //        }
     //    }
     //}
+    /**
+     * принимает значение для проверки или использует уже введённое.
+     *
+     * @param value входное значение
+     * @return возвращает результат проверки валидации
+     */
     @Override
     public boolean isValid(Object value) {
         if (value == null) {
@@ -68,7 +107,7 @@ public class NumberSchema extends BaseSchema<Integer> {
         }
         return validate((Integer) value);
     }
-    private Integer curNumber;
+    //private Integer curNumber;
     private boolean isRequired;
     private boolean isPositive;
     private Integer curLowerRange;
