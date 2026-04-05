@@ -1,5 +1,5 @@
 import hexlet.code.Validator;
-import hexlet.code.StringSchema;
+//import hexlet.code.StringSchema;
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.assertEquals;
@@ -34,7 +34,7 @@ public class StringSchemaTest {
     @Test
     void testInpStrLowerControlStr() throws Exception {
         String curInpString = "This is test string";
-        int inpStrLength = 15;
+        final int inpStrLength = 15;
         var v = new Validator();
         var schema = v.string().minLength(inpStrLength);
         boolean actualResultWorkMinLength = schema.isValid(curInpString);
@@ -44,7 +44,7 @@ public class StringSchemaTest {
     @Test
     void testInpStrUpperControlStr() throws Exception {
         String curInpString = "This is test string";
-        int inpStrLength = 25;
+        final int inpStrLength = 25;
         var v = new Validator();
         var schema = v.string().minLength(inpStrLength);
         boolean actualResultWorkMinLength = schema.isValid(curInpString);
