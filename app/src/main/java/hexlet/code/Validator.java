@@ -14,11 +14,15 @@ public class Validator {
      *
      * @return возвращает объект NumberSchema
      */
-    public NumberSchema number() { return new NumberSchema(Integer.class); }
+    public NumberSchema number() {
+        return new NumberSchema(Integer.class);
+    }
     /**
      * определяет схему MapSchema. Эта схема используется для валидации объектов типа Map.
      *
      * @return возвращает объект MapSchema
      */
-    public MapSchema map() { return new MapSchema(); }
+    public MapSchema map() {
+        return new MapSchema();
+    }
 }
