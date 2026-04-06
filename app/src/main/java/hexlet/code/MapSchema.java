@@ -163,3 +163,4 @@ public class MapSchema<T> {
     private boolean isRunSizeof;
     private Map<T, BaseSchema<T>> propertySchemas = new HashMap();
 }
+
