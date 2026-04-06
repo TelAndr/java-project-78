@@ -134,9 +134,12 @@ public class MapSchemaTest {
     void testDifferentsTypesKeysValuesMap() throws Exception {
         final int lengthEqualMap = 3;
         Map mapData = new HashMap<String, Integer>();
-        mapData.put("testKeyOne", 1);
-        mapData.put("testKeyTwo", 2);
-        mapData.put("testKeyThree", 3);
+        final int mapDataVal1 = 1;
+        final int mapDataVal2 = 2;
+        final int mapDataVal3 = 3;
+        mapData.put("testKeyOne", mapDataVal1);
+        mapData.put("testKeyTwo", mapDataVal2);
+        mapData.put("testKeyThree", mapDataVal3);
         var v = new Validator();
         var schema = v.map().required().sizeof(lengthEqualMap);
         boolean actualResultWorkLowerMinValue = schema.isValid(mapData);
@@ -172,7 +175,7 @@ public class MapSchemaTest {
         var v = new Validator();
         var schema = v.map();
         int minIntValue = 2;
-        int maxIntValue = 5;
+        final int maxIntValue = 5;
         final int minVelocity = 10;
         final int maxVelocity = 60;
         Map<String, hexlet.code.BaseSchema<Integer>> schemas = new HashMap<>();
@@ -236,7 +239,7 @@ public class MapSchemaTest {
         assertTrue(schema.isValid(velocityTransp)); // true
     }
     @Test
-    void testCorrectValidDataCombiСonditionsString() throws Exception {
+    void testCorrectValidDataComСonString() throws Exception {
         var v = new Validator();
         var schema = v.map();
         Map<String, hexlet.code.BaseSchema<String>> schemas = new HashMap<>();
