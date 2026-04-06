@@ -1,5 +1,5 @@
 import hexlet.code.Validator;
-import hexlet.code.StringSchema;
+//import hexlet.code.StringSchema;
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.assertEquals;
@@ -16,7 +16,7 @@ public class NumberSchemaTest {
     }
     @Test
     void testNotEmptyInput() throws Exception {
-        Integer curNumberNotEmpty = 25;
+        final Integer curNumberNotEmpty = 25;
         var v = new Validator();
         var schema = v.number().required();
         boolean actualResultWorkRequired = schema.isValid(curNumberNotEmpty);
@@ -25,9 +25,9 @@ public class NumberSchemaTest {
     }
     @Test
     void testInpNumLowerMinValue() throws Exception {
-        int curInpNum = 12;
-        int valLowerRange = 15;
-        int valUpperRange = 25;
+        final int curInpNum = 12;
+        final int valLowerRange = 15;
+        final int valUpperRange = 25;
         var v = new Validator();
         var schema = v.number().range(valLowerRange, valUpperRange);
         boolean actualResultWorkLowerMinValue = schema.isValid(curInpNum);
@@ -36,9 +36,9 @@ public class NumberSchemaTest {
     }
     @Test
     void testInpNumEqualMinValue() throws Exception {
-        int curInpNum = 15;
-        int valLowerRange = 15;
-        int valUpperRange = 25;
+        final int curInpNum = 15;
+        final int valLowerRange = 15;
+        final int valUpperRange = 25;
         var v = new Validator();
         var schema = v.number().range(valLowerRange, valUpperRange);
         boolean actualResultWorkEqualMinValue = schema.isValid(curInpNum);
@@ -47,9 +47,9 @@ public class NumberSchemaTest {
     }
     @Test
     void testInpNumUpperMinValue() throws Exception {
-        int curInpNum = 20;
-        int valLowerRange = 15;
-        int valUpperRange = 25;
+        final int curInpNum = 20;
+        final int valLowerRange = 15;
+        final int valUpperRange = 25;
         var v = new Validator();
         var schema = v.number().range(valLowerRange, valUpperRange);
         boolean actualResultWorkUpperMinValue = schema.isValid(curInpNum);
@@ -58,9 +58,9 @@ public class NumberSchemaTest {
     }
     @Test
     void testInpNumLowerMaxValue() throws Exception {
-        int curInpNum = 20;
-        int valLowerRange = 15;
-        int valUpperRange = 25;
+        final int curInpNum = 20;
+        final int valLowerRange = 15;
+        final int valUpperRange = 25;
         var v = new Validator();
         var schema = v.number().range(valLowerRange, valUpperRange);
         boolean actualResultWorkLowerMaxValue = schema.isValid(curInpNum);
@@ -69,9 +69,9 @@ public class NumberSchemaTest {
     }
     @Test
     void testInpNumEqualMaxValue() throws Exception {
-        int curInpNum = 25;
-        int valLowerRange = 15;
-        int valUpperRange = 25;
+        final int curInpNum = 25;
+        final int valLowerRange = 15;
+        final int valUpperRange = 25;
         var v = new Validator();
         var schema = v.number().range(valLowerRange, valUpperRange);
         boolean actualResultWorkEqualMaxValue = schema.isValid(curInpNum);
@@ -80,9 +80,9 @@ public class NumberSchemaTest {
     }
     @Test
     void testInpNumUpperMaxValue() throws Exception {
-        int curInpNum = 30;
-        int valLowerRange = 15;
-        int valUpperRange = 25;
+        final int curInpNum = 30;
+        final int valLowerRange = 15;
+        final int valUpperRange = 25;
         var v = new Validator();
         var schema = v.number().range(valLowerRange, valUpperRange);
         boolean actualResultWorkUpperMaxValue = schema.isValid(curInpNum);
@@ -90,8 +90,8 @@ public class NumberSchemaTest {
         assertEquals(expectedResultWorkUpperMaxValue, actualResultWorkUpperMaxValue);
     }
     @Test
-    void TestInpNegativeValue() throws Exception {
-        int curInpNum = -10;
+    void testInpNegativeValue() throws Exception {
+        final int curInpNum = -10;
         var v = new Validator();
         var schema = v.number().positive();
         boolean actualResultWorkNegativeValue = schema.isValid(curInpNum);
