@@ -1,6 +1,6 @@
 import hexlet.code.BaseSchema;
 import hexlet.code.Validator;
-import hexlet.code.MapSchema;
+//import hexlet.code.MapSchema;
 import org.testng.annotations.Test;
 
 import java.util.HashMap;
@@ -80,7 +80,7 @@ public class MapSchemaTest {
     }
     @Test
     void testInpMapEqualMinValue() throws Exception {
-        int lengthEqualMap = 3;
+        final int lengthEqualMap = 3;
         Map mapData = new HashMap<String, String>();
         mapData.put("testKeyOne", "testValueOne");
         mapData.put("testKeyTwo", "testValueTwo");
@@ -93,7 +93,7 @@ public class MapSchemaTest {
     }
     @Test
     void testInpMapUpperMinValue() throws Exception {
-        int lengthUpperMap = 4;
+        final int lengthUpperMap = 4;
         Map mapData = new HashMap<String, String>();
         mapData.put("testKeyOne", "testValueOne");
         mapData.put("testKeyTwo", "testValueTwo");
@@ -119,7 +119,7 @@ public class MapSchemaTest {
     }
     @Test
     void testNotInputMapEqualMinValue() throws Exception {
-        int lengthEqualMap = 3;
+        final int lengthEqualMap = 3;
         Map mapData = new HashMap<String, String>();
         mapData.put("testKeyOne", "testValueOne");
         mapData.put("testKeyTwo", "testValueTwo");
@@ -132,7 +132,7 @@ public class MapSchemaTest {
     }
     @Test
     void testDifferentsTypesKeysValuesMap() throws Exception {
-        int lengthEqualMap = 3;
+        final int lengthEqualMap = 3;
         Map mapData = new HashMap<String, Integer>();
         mapData.put("testKeyOne", 1);
         mapData.put("testKeyTwo", 2);
@@ -173,8 +173,8 @@ public class MapSchemaTest {
         var schema = v.map();
         int minIntValue = 2;
         int maxIntValue = 5;
-        int minVelocity = 10;
-        int maxVelocity = 60;
+        final int minVelocity = 10;
+        final int maxVelocity = 60;
         Map<String, hexlet.code.BaseSchema<Integer>> schemas = new HashMap<>();
         schemas.put("typeTransport", v.number().required());
         schemas.put("modelTransport", v.number().required().range(minIntValue, maxIntValue));
@@ -189,9 +189,9 @@ public class MapSchemaTest {
         var v = new Validator();
         var schema = v.map();
         int minIntValue = 2;
-        int maxIntValue = 5;
-        int minVelocity = 10;
-        int maxVelocity = 60;
+        final int maxIntValue = 5;
+        final int minVelocity = 10;
+        final int maxVelocity = 60;
         Map<String, hexlet.code.BaseSchema<Integer>> schemas = new HashMap<>();
         schemas.put(null, v.number().required());
         schemas.put("modelTransport", v.number().required().range(minIntValue, maxIntValue));
@@ -206,10 +206,10 @@ public class MapSchemaTest {
         var v = new Validator();
         var schema = v.map();
         int minIntValue = 2;
-        int maxIntValue = 5;
-        int minVelocity = 10;
-        int maxVelocity = 60;
-        int maxVelocityPlain = 1000;
+        final int maxIntValue = 5;
+        final int minVelocity = 10;
+        final int maxVelocity = 60;
+        final int maxVelocityPlain = 1000;
         Map<String, BaseSchema<Integer>> schemas = new HashMap<>();
         schemas.put("typeTransport", v.number().required());
         schemas.put("modelTransport", v.number().required().range(minIntValue, maxIntValue));
@@ -225,9 +225,9 @@ public class MapSchemaTest {
         var v = new Validator();
         var schema = v.map();
         int minIntValue = 2;
-        int maxIntValue = 5;
-        int minVelocity = 10;
-        int maxVelocity = 60;
+        final int maxIntValue = 5;
+        final int minVelocity = 10;
+        final int maxVelocity = 60;
         Map<String, hexlet.code.BaseSchema<Integer>> schemas = new HashMap<>();
         schema.shape(schemas);
         Map<String, Integer> velocityTransp = new HashMap<>();
@@ -248,5 +248,4 @@ public class MapSchemaTest {
         transp1.put("modelTransport", "CarBMW");
         assertTrue(schema.isValid(transp1)); // true
     }
-
 }
