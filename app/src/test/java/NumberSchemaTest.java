@@ -99,7 +99,7 @@ public class NumberSchemaTest {
         assertEquals(expectedResultWorkNegativeValue, actualResultWorkNegativeValue);
     }
     @Test
-    void TestInpZeroValue() throws Exception {
+    void testInpZeroValue() throws Exception {
         int curInpNum = 0;
         var v = new Validator();
         var schema = v.number().positive();
@@ -108,8 +108,8 @@ public class NumberSchemaTest {
         assertEquals(expectedResultWorkZeroValue, actualResultWorkZeroValue);
     }
     @Test
-    void TestInpPositiveValue() throws Exception {
-        int curInpNum = 10;
+    void testInpPositiveValue() throws Exception {
+        final int curInpNum = 10;
         var v = new Validator();
         var schema = v.number().positive();
         boolean actualResultWorkPositiveValue = schema.isValid(curInpNum);
@@ -117,10 +117,10 @@ public class NumberSchemaTest {
         assertEquals(expectedResultWorkPositiveValue, actualResultWorkPositiveValue);
     }
     @Test
-    void TestInpCycleValue() throws Exception {
+    void testInpCycleValue() throws Exception {
         int curInpNumFirst = Integer.parseInt(null);
         String curInpNumSecond = "ten";
-        int curInpNumThird = 15;
+        final int curInpNumThird = 15;
         var v = new Validator();
         var schema = v.number().positive();
         boolean actualResultWorkFirstValue = schema.isValid(curInpNumFirst);
@@ -130,7 +130,7 @@ public class NumberSchemaTest {
         assertEquals(expectedResultWorkThirdValue, actualResultWorkThirdValue);
     }
     @Test
-    void TestNotNumberValue() throws Exception {
+    void testNotNumberValue() throws Exception {
         String curInpValue = "Not number";
         var v = new Validator();
         var schema = v.number().positive();
