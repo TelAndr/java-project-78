@@ -239,7 +239,7 @@ public class MapSchemaTest {
         assertTrue(schema.isValid(velocityTransp)); // true
     }
     @Test
-    void testCorrectValidDataComСonString() throws Exception {
+    void testCorrValidData() throws Exception {
         var v = new Validator();
         var schema = v.map();
         Map<String, hexlet.code.BaseSchema<String>> schemas = new HashMap<>();
