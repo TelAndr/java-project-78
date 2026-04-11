@@ -38,8 +38,9 @@ public abstract class BaseSchema<T> {
      * @param innerSubstring строковое значение подстроки
      * @return определяет значение предиката
      */
-    public Predicate<String> detectContains(String innerSubstring) {   return s -> (innerSubstring != null
-            && !s.contains(innerSubstring));    }
+    public Predicate<String> detectContains(String innerSubstring) {
+        return s -> (innerSubstring != null && !s.contains(innerSubstring));
+    }
     /**
      *
      * проверяет на нулевое значение.
@@ -60,6 +61,8 @@ public abstract class BaseSchema<T> {
     /**
      * проверяет на соответствие вхождению в диапазон от lowerRange до upperRange.
      *
+     * @param curLowerRange нижняя граница числового диапазона
+     * @param curUpperRange верхняя граница числового диапазона
      * @return определяет значение предиката
      */
     public Predicate<Integer> detectRange(int curLowerRange, int curUpperRange) {
