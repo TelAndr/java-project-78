@@ -1,5 +1,5 @@
 import hexlet.code.Validator;
-//import hexlet.code.StringSchema;
+//import hexlet.code.schemas.StringSchema;
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.assertEquals;
