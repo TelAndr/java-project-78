@@ -1,4 +1,4 @@
-package hexlet.code;
+package hexlet.code.schemas;
 
 import java.util.Map;
 import java.util.HashMap;
@@ -145,7 +145,7 @@ public class MapSchema<T> {
     //    }
     //    for (Map.Entry<String, BaseSchema<?>> entry : propertySchemas.entrySet()) {
     //        String key = entry.getKey();
-    //        hexlet.code.BaseSchema<?> schema = entry.getValue();
+    //        hexlet.code.schemas.BaseSchema<?> schema = entry.getValue();
 
     //        Object value = data.get(key);
             // Передача value в isValid схему, если она существует
