@@ -1,4 +1,4 @@
-package hexlet.code;
+package hexlet.code.schemas;
 
 import java.util.Scanner;
 public class NumberSchema extends BaseSchema<Integer> {
