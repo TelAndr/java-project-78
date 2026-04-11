@@ -20,7 +20,7 @@ public abstract class BaseSchema<T> {
      *
      * @return определяет значение предиката
      */
-    public Predicate<String> detectRequired() {
+    public Predicate<String> detectRequiredString() {
         return s -> (s == null || s.isEmpty());
     }
     /**
@@ -33,12 +33,37 @@ public abstract class BaseSchema<T> {
         return s -> s.length() > minLen;
     }
     /**
+     * проверяет на соответствие вхождения конкретной подстроки в строку.
+     *
+     * @param innerSubstring строковое значение подстроки
+     * @return определяет значение предиката
+     */
+    public Predicate<String> detectContains(String innerSubstring) {   return s -> (innerSubstring != null
+            && !s.contains(innerSubstring));    }
+    /**
+     *
+     * проверяет на нулевое значение.
+     *
+     * @return определяет значение предиката
+     */
+    public Predicate<Number> detectRequiredNumber() {
+        return n -> (n == null);
+    }
+    /**
      * проверяет на соответствие положительному значению числа.
      *
      * @return определяет значение предиката
      */
     public Predicate<Integer> detectPositive() {
-        return x -> x > 0;
+        return x -> x <= 0;
+    }
+    /**
+     * проверяет на соответствие вхождению в диапазон от lowerRange до upperRange.
+     *
+     * @return определяет значение предиката
+     */
+    public Predicate<Integer> detectRange(int curLowerRange, int curUpperRange) {
+        return n -> (n < curLowerRange || n > curUpperRange);
     }
     private Map<String, Predicate<T>> checks = new HashMap<>();
     /**
