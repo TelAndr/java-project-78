@@ -87,9 +87,9 @@ public class MapSchema<T> {
         }
 
         // Проверка схем для каждого свойства
-        for (Map.Entry<T, BaseSchema<T>> entry : propertySchemas.entrySet()) {
+        for (Map.Entry<T, BaseSchema<?>> entry : propertySchemas.entrySet()) {
             T key = entry.getKey();
-            BaseSchema<T> schema = entry.getValue();
+            BaseSchema<?> schema = entry.getValue();
 
             Object value = mapInput.get(key);
             if (!schema.isValid(value)) {
@@ -161,6 +161,6 @@ public class MapSchema<T> {
     private int curValSizeMap;
     private boolean isRunRequired;
     private boolean isRunSizeof;
-    private Map<T, BaseSchema<T>> propertySchemas = new HashMap();
+    private Map<T, BaseSchema<?>> propertySchemas = new HashMap();
 }
 
