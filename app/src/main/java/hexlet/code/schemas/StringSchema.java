@@ -57,6 +57,28 @@ public class StringSchema extends BaseSchema<String> {
         return this;
     }
     /**
+     * добавляет в схему ограничение, которое не позволяет использовать null в качестве значения
+     * Этот метод может быть переопределен в подклассах для изменения поведения.
+     *
+     * @return значение типа исходного класса.
+     */
+    public StringSchema notEmpty() {
+        addCheck("notEmpty", s -> s != null && !s.isEmpty());
+        return this;
+    }
+    /**
+     * добавляет в схему ограничение минимальной длины для строки.
+     * Строка должна быть равна или длиннее указанного числа
+     * Этот метод может быть пcastереопределен в подклассах для изменения поведения.
+     *
+     * @param length минимальное значение длины строки
+     * @return значение типа исходного класса.
+     */
+    public StringSchema minLengthMod(int length) {
+        addCheck("minLength", s -> s != null && s.length() >= length);
+        return this;
+    }
+    /**
      * выполняет проверки по сохранённым параметрам и возвращает true или false.
      *
      * @param curString преобразуемое значение
@@ -74,6 +96,18 @@ public class StringSchema extends BaseSchema<String> {
         if (isCurContains && (innerSubstring != null && !curString.contains(innerSubstring))) {
             result = false;
         }
+        ///////////////////////////////////////////////////////////
+        //String checkRequired = "isRequired";
+        //if (isRequired) {
+        //    addCheck(checkRequired, detectRequiredString());
+        //    result = false;
+        //}
+        //if (isGreaterMinLength &&  (curString.length() < curValMinLength)) {
+        //    result = false;
+        //}
+        //if (isCurContains && (innerSubstring != null && !curString.contains(innerSubstring))) {
+        //    result = false;
+        //}
         return result;
     }
     //public boolean isValid() {
