@@ -90,7 +90,7 @@ public abstract class BaseSchema<T> {
      * добавляет проверку с конкретным названием и конкретный предикат.
      *
      * @param name название проверки
-     * @param validate конкретны
+     * @param validate конкретный предикат
      */
     protected final void addCheck(String name, Predicate<T> validate) {
         checks.put(name, validate);
@@ -142,8 +142,19 @@ public abstract class BaseSchema<T> {
      * @return возвращает результат проверки валидации
      */
     public boolean isValid(Object value) {
+        //if (value == null) {
+        //    return !isRequired; // nullable, если не обязательно
+        //}
+        if (value == null) {
+            return !required; // или вернем false, если обязательно
+        }
+        for (Predicate<T> check : checks.values()) {
+            if (!check.test((T) value)) {
+                return false;
+            }
+        }
         try {
-            T castedValue = castValue(curValue);
+            T castedValue = castValue(value);
             return validate(castedValue);
         } catch (ClassCastException e) {
             return false; // неправильный тип
