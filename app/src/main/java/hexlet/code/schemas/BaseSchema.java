@@ -170,6 +170,16 @@ public abstract class BaseSchema<T> {
         //    }
         //}
     }
+    /**
+     * добавляет в схему ограничение, которое не позволяет использовать null в качестве значения
+     * Этот метод может быть переопределен в подклассах для изменения поведения.
+     *
+     * @return значение типа исходного класса.
+     */
+    public BaseSchema<T> required() {
+        this.required = true;
+        return this;
+    }
     protected abstract T cast(Object value);
     private static Scanner scanner = new Scanner(System.in);
     private T curValue;
