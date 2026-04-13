@@ -37,12 +37,12 @@ public class StringSchema extends BaseSchema<String> {
      * @param valMinLength минимальное значение длины строки
      * @return значение типа исходного класса.
      */
-    public StringSchema minLength(int valMinLength) {
-        isRunMinLength = true;
-        this.curValMinLength = valMinLength;
-        isGreaterMinLength = true;
-        return this;
-    }
+    //public StringSchema minLength(int valMinLength) {
+    //    isRunMinLength = true;
+    //    this.curValMinLength = valMinLength;
+    //    isGreaterMinLength = true;
+    //    return this;
+    //}
     /**
      * добавляет в схему ограничение для проверки вхождения исходной подстроки в строку.
      * Этот метод может быть переопределен в подклассах для изменения поведения.
@@ -50,12 +50,12 @@ public class StringSchema extends BaseSchema<String> {
      * @param curSubstring строковое значение подстроки
      * @return значение типа исходного класса.
      */
-    public StringSchema contains(String curSubstring) {
-        isRunContains = true;
-        this.innerSubstring = curSubstring;
-        isCurContains = true;
-        return this;
-    }
+    //public StringSchema contains(String curSubstring) {
+    //    isRunContains = true;
+    //    this.innerSubstring = curSubstring;
+    //    isCurContains = true;
+    //    return this;
+    //}
     /**
      * добавляет в схему ограничение, которое не позволяет использовать null в качестве значения
      * Этот метод может быть переопределен в подклассах для изменения поведения.
@@ -74,8 +74,19 @@ public class StringSchema extends BaseSchema<String> {
      * @param length минимальное значение длины строки
      * @return значение типа исходного класса.
      */
-    public StringSchema minLengthMod(int length) {
+    public StringSchema minLength(int length) {
         addCheck("minLength", s -> s != null && s.length() >= length);
+        return this;
+    }
+    /**
+     * добавляет в схему ограничение для проверки вхождения исходной подстроки в строку.
+     * Этот метод может быть переопределен в подклассах для изменения поведения.
+     *
+     * @param substring строковое значение подстроки
+     * @return значение типа исходного класса.
+     */
+    public StringSchema contains(String substring) {
+        addCheck("contains", s -> s != null && s.contains(substring));
         return this;
     }
     /**
