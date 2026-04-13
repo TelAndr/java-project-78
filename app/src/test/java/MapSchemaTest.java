@@ -244,7 +244,7 @@ public class MapSchemaTest {
         var schema = v.map();
         Map<String, BaseSchema<String>> schemas = new HashMap<>();
         schemas.put("typeTransport", v.string().required());
-        schemas.put("modelTransport", v.string().required().minLength(2).contains("Car"));
+        schemas.put("modelTransport", v.string().required().minLength(3).contains("Car"));
         schema.shape(schemas);
         Map<String, String> transp1 = new HashMap<>();
         transp1.put("typeTransport", "Car");
