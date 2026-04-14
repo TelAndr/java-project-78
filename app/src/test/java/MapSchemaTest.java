@@ -242,9 +242,10 @@ public class MapSchemaTest {
     void testCorrValidData() throws Exception {
         var v = new Validator();
         var schema = v.map();
+        final int valMinLength = 3;
         Map<String, BaseSchema<String>> schemas = new HashMap<>();
         schemas.put("typeTransport", v.string().required());
-        schemas.put("modelTransport", v.string().required().minLength(3).contains("Car"));
+        schemas.put("modelTransport", v.string().required().minLength(valMinLength).contains("Car"));
         schema.shape(schemas);
         Map<String, String> transp1 = new HashMap<>();
         transp1.put("typeTransport", "Car");
