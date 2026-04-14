@@ -29,27 +29,12 @@ public class StringSchema extends BaseSchema<String> {
         isRequired = true;
         return this;
     }
-    /**
-     * добавляет в схему ограничение минимальной длины для строки.
-     * Строка должна быть равна или длиннее указанного числа
-     * Этот метод может быть пcastереопределен в подклассах для изменения поведения.
-     *
-     * @param valMinLength минимальное значение длины строки
-     * @return значение типа исходного класса.
-     */
     //public StringSchema minLength(int valMinLength) {
     //    isRunMinLength = true;
     //    this.curValMinLength = valMinLength;
     //    isGreaterMinLength = true;
     //    return this;
     //}
-    /**
-     * добавляет в схему ограничение для проверки вхождения исходной подстроки в строку.
-     * Этот метод может быть переопределен в подклассах для изменения поведения.
-     *
-     * @param curSubstring строковое значение подстроки
-     * @return значение типа исходного класса.
-     */
     //public StringSchema contains(String curSubstring) {
     //    isRunContains = true;
     //    this.innerSubstring = curSubstring;
