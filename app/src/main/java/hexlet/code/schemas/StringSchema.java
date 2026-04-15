@@ -119,22 +119,17 @@ public class StringSchema extends BaseSchema<String> {
     //        }
     //    }
     //}
-    /**
-     * принимает значение для проверки или использует уже введённое.
-     *
-     * @param value входное значение
-     * @return возвращает результат проверки валидации
-     */
-    @Override
-    public boolean isValid(Object value) {
-        if (value == null) {
-            return !isRequired; // например, null допустим, если не required
-        }
-        if (!(value instanceof String)) {
-            return false; // тип не совпадает
-        }
-        return validate((String) value);
-    }
+
+    //@Override
+    //public boolean isValid(Object value) {
+    //    if (value == null) {
+    //        return !isRequired; // например, null допустим, если не required
+    //    }
+    //    if (!(value instanceof String)) {
+    //        return false; // тип не совпадает
+    //    }
+    //    return validate((String) value);
+    //}
     //private String curString;
     private int curValMinLength;
     private String innerSubstring;
