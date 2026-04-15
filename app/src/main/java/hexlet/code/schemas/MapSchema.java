@@ -76,6 +76,14 @@ public class MapSchema<T> {
 
         Map<?, ?> mapInput = (Map<?, ?>) input;
 
+        if (mapInput == null) {
+            if (isRequired) {
+                return false;
+            } else {
+                // не обязательно, значит и null —валид
+                return true;
+            }
+        }
         // Проверка ограничения "обязательность"
         if (isRunRequired && isRequired && (mapInput.isEmpty())) {
             return false;
