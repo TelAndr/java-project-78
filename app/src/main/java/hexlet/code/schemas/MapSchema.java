@@ -63,11 +63,11 @@ public class MapSchema<T> {
      * @return значение типа исходного класса.
      */
     public boolean isValid(Object input) {
-        //if (input == null) {
+        if (input == null) {
             // Если верхний Map не обязателен — возвращаем true
             // Если обязательный — false
-        //    return !isRequired;
-        //}
+            return !isRequired;
+        }
 
         if (!(input instanceof Map<?, ?>)) {
             // Если передали не Map — возвращается false
