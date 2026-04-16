@@ -80,8 +80,8 @@ public class MapSchema<T> {
         //    return true;
         //}
         // Проверка ограничения "обязательность"
-        if (isRunRequired && isRequired && (mapInput.isEmpty())) {
-            return true;
+        if (isRunRequired && isRequired && !(mapInput.isEmpty())) {
+            return false;
         }
 
         // Проверка размера
