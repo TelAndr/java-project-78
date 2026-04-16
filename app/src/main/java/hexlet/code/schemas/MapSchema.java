@@ -76,12 +76,12 @@ public class MapSchema<T> {
 
         Map<?, ?> mapInput = (Map<?, ?>) input;
 
-        if (mapInput.isEmpty()) {
-            return true;
-        }
+        //if (mapInput.isEmpty()) {
+        //    return true;
+        //}
         // Проверка ограничения "обязательность"
         if (isRunRequired && isRequired && (mapInput.isEmpty())) {
-            return false;
+            return true;
         }
 
         // Проверка размера
