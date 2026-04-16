@@ -83,7 +83,9 @@ public class MapSchema<T> {
         if (isRunRequired && isRequired && !(mapInput.isEmpty())) {
             return false;
         }
-
+        if (isRunSizeof && isSizeof && mapInput.isEmpty()) {
+            return false;
+        }
         // Проверка размера
         if (isRunSizeof && isSizeof && (mapInput.size() != curValSizeMap)) {
             return false;
