@@ -8,6 +8,7 @@ import java.util.Map;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class MapSchemaTest {
     @Test
@@ -251,5 +252,20 @@ public class MapSchemaTest {
         transp1.put("typeTransport", "Car");
         transp1.put("modelTransport", "CarBMW");
         assertTrue(schema.isValid(transp1)); // true
+    }
+    @Test
+    void testDopEmptyInputMap() throws Exception {
+        var v = new Validator();
+        var schema = v.map();
+
+        assertThat(schema.isValid(null)).isTrue();
+        assertThat(schema.isValid(new HashMap<>())).isTrue();
+
+        schema.required();
+        assertThat(schema.isValid(null)).isFalse();
+        assertThat(schema.isValid(new HashMap<>())).isTrue();
+
+        schema.sizeof(2);
+        assertThat(schema.isValid(new HashMap<>())).isFalse();
     }
 }
