@@ -18,8 +18,20 @@ public class App {
         final int maxAge = 100;
         System.out.printf("Hello git and welcome!");
         // Создаем валидатор
-        hexlet.code.Validator validator = new hexlet.code.Validator();
+        Validator validator = new Validator();
+        //////////////////////////////////////////////////////
+        var schema = validator.map();
 
+        boolean truValidNull = schema.isValid(null);
+        boolean truValidEmptyMapInp = schema.isValid(new HashMap<>());
+
+        schema.required();
+        boolean falseValidNull = schema.isValid(null);
+        boolean trueValidEmptyMapInp = schema.isValid(new HashMap<>());
+
+        schema.sizeof(2);
+        boolean falseValidEmptyMapInp = schema.isValid(new HashMap<>());
+        //////////////////////////////////////////////////////
         // Создаем схему для строки с минимальной длиной 5 и обязательным полем
         var stringSchema = validator.string().required().minLength(valMinLength);
 
