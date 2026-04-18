@@ -24,6 +24,7 @@ public class MapSchema<T> {
      */
     public MapSchema sizeof(int size) {
         isRunSizeof = true;
+        isSizeof = true;
         this.curValSizeMap = size;
         return this;
     }
