@@ -20,6 +20,12 @@ public class App {
         // Создаем валидатор
         Validator validator = new Validator();
         //////////////////////////////////////////////////////
+        var strSchema = validator.string();
+        boolean trueEmptyString = strSchema.isValid("");
+
+        strSchema.required();
+        boolean truStringContFewWords = strSchema.isValid("what does the fox say");
+        //////////////////////////////////////////////////////
         var schema = validator.map();
 
         boolean truValidNull = schema.isValid(null);
