@@ -101,18 +101,14 @@ public abstract class BaseSchema<T> {
      * @param value преобразуемое значение
      * @return возвращает результат преобразования в конкретный тип
      */
-    protected T castValue(Object value) {
-        return null;
-    }
+    //protected  abstract T castValue(Object value);
     /**
      * выполняет проверки по сохранённым параметрам и возвращает true или false.
      *
      * @param value преобразуемое значение
      * @return возвращает результат проверки
      */
-    protected boolean validate(T value) {
-        return false;
-    }
+    protected abstract boolean validate(T value);
 
     public BaseSchema(Class<T> type) {
         this.type = type;
@@ -154,7 +150,7 @@ public abstract class BaseSchema<T> {
             }
         }
         try {
-            T castedValue = castValue(value);
+            T castedValue = cast(value);
             return validate(castedValue);
         } catch (ClassCastException e) {
             return false; // неправильный тип
