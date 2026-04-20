@@ -95,12 +95,6 @@ public abstract class BaseSchema<T> {
     protected final void addCheck(String name, Predicate<T> validate) {
         checks.put(name, validate);
     }
-    /**
-     * преобразует переданный объект value в тип T.
-     *
-     * @param value преобразуемое значение
-     * @return возвращает результат преобразования в конкретный тип
-     */
     //protected  abstract T castValue(Object value);
     /**
      * выполняет проверки по сохранённым параметрам и возвращает true или false.
