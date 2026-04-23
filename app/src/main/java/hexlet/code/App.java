@@ -1,6 +1,8 @@
 package hexlet.code;
 
 import hexlet.code.schemas.BaseSchema;
+import hexlet.code.schemas.NumberSchema;
+import hexlet.code.schemas.StringSchema;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -24,7 +26,10 @@ public class App {
         boolean trueEmptyString = strSchema.isValid("");
 
         strSchema.required();
-        boolean truStringContFewWords = strSchema.isValid("what does the fox say");
+        boolean trueStringContFewWords = strSchema.isValid("what does the fox say");
+        boolean trueStringContOneWord = strSchema.isValid("hexlet");
+        boolean falseEmptyString = strSchema.isValid("");
+        boolean falseNullString = strSchema.isValid(null);
         //////////////////////////////////////////////////////
         var schema = validator.map();
 
@@ -39,7 +44,7 @@ public class App {
         boolean falseValidEmptyMapInp = schema.isValid(new HashMap<>());
         //////////////////////////////////////////////////////
         // Создаем схему для строки с минимальной длиной 5 и обязательным полем
-        var stringSchema = validator.string().required().minLength(valMinLength);
+        StringSchema stringSchema = validator.string().required().minLength(valMinLength);
 
         // Проверка данных: правильная
         System.out.println(stringSchema.isValid("hello")); // true
@@ -54,8 +59,8 @@ public class App {
         var mapSchema = validator.map();
 
         // Настраиваем схему Map с shape()
-        Map<String, BaseSchema<String>> schemaString = new HashMap<>();
-        Map<String, BaseSchema<Integer>> schemaInteger = new HashMap<>();
+        Map<String, BaseSchema<String, StringSchema>> schemaString = new HashMap<>();
+        Map<String, BaseSchema<Integer, NumberSchema>> schemaInteger = new HashMap<>();
         schemaString.put("name", validator.string().required());
         schemaInteger.put("age", validator.number().range(minAge, maxAge));
 
