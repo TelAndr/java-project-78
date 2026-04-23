@@ -5,7 +5,8 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.function.Predicate;
 
-public abstract class BaseSchema<T> {
+//public abstract class BaseSchema<T> {
+public abstract class BaseSchema<T, S extends BaseSchema<T, S>> {
     /**
      * определяет является ли строка непустой или ненулевой.
      *
@@ -77,7 +78,7 @@ public abstract class BaseSchema<T> {
     Map<String, Predicate<T>> getChecks() {
         return checks;
     }
-    private boolean required = false;
+    protected boolean required = false;
     /**
      * делает возможным использование required извне класса BaseSchema<T>.
      *
@@ -166,10 +167,11 @@ public abstract class BaseSchema<T> {
      *
      * @return значение типа исходного класса.
      */
-    public BaseSchema<T> required() {
+    public S required() {
         this.required = true;
-        return this;
+        return self();
     }
+    protected abstract S self();
     protected abstract T cast(Object value);
     private static Scanner scanner = new Scanner(System.in);
     private T curValue;
