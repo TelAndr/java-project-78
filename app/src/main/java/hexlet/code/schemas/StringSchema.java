@@ -1,9 +1,14 @@
 package hexlet.code.schemas;
 
 import java.util.Scanner;
-public class StringSchema extends BaseSchema<String> {
+//public class StringSchema extends BaseSchema<String> {
+public class StringSchema extends BaseSchema<String, StringSchema> {
     public StringSchema(Class<String> type) {
         super(type);
+    }
+    @Override
+    protected StringSchema self() {
+        return this;
     }
     /**
      * Преобразует тип выходного значения в строковый тип.
@@ -18,17 +23,12 @@ public class StringSchema extends BaseSchema<String> {
         }
         throw new ClassCastException("Value is not a String");
     }
-    /**
-     * добавляет в схему ограничение, которое не позволяет использовать null в качестве значения
-     * Этот метод может быть переопределен в подклассах для изменения поведения.
-     *
-     * @return значение типа исходного класса.
-     */
-    public StringSchema required() {
-        isRunRequired = true;
-        isRequired = true;
-        return this;
-    }
+
+    //public StringSchema required() {
+    //    this.isRunRequired = true;
+    //    this.isRequired = true;
+    //    return this;
+    //}
     //public StringSchema minLength(int valMinLength) {
     //    isRunMinLength = true;
     //    this.curValMinLength = valMinLength;
@@ -83,6 +83,7 @@ public class StringSchema extends BaseSchema<String> {
     @Override
     protected boolean validate(String curString) {
         boolean result = true;
+        boolean isRequired = getValueRequired();
         if (isRequired && (curString == null || curString.isEmpty())) {
             result = false;
         }
@@ -133,8 +134,8 @@ public class StringSchema extends BaseSchema<String> {
     //private String curString;
     private int curValMinLength;
     private String innerSubstring;
-    private boolean isRequired;
-    private boolean isGreaterMinLength;
+    //private boolean isRequired = false;
+    private boolean isGreaterMinLength = false;
     private boolean isCurContains;
     private boolean isRunRequired;
     private boolean isRunMinLength;
