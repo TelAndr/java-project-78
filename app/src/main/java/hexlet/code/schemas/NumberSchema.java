@@ -1,11 +1,15 @@
 package hexlet.code.schemas;
 
 import java.util.Scanner;
-public class NumberSchema extends BaseSchema<Integer> {
+//public class NumberSchema extends BaseSchema<Integer> {
+public class NumberSchema extends BaseSchema<Integer, NumberSchema> {
     public NumberSchema(Class<Integer> type) {
         super(type);
     }
-
+    @Override
+    protected NumberSchema self() {
+        return this;
+    }
     /**
      * преобразует переданный объект value в тип Integer.
      *
@@ -19,17 +23,12 @@ public class NumberSchema extends BaseSchema<Integer> {
         }
         throw new ClassCastException("Value is not a Number");
     }
-    /**
-     * добавляет в схему ограничение, которое не позволяет использовать null в качестве значения
-     * Этот метод может быть переопределен в подклассах для изменения поведения.
-     *
-     * @return значение типа исходного класса.
-     */
-    public NumberSchema required() {
-        isRunRequired = true;
-        isRequired = true;
-        return this;
-    }
+
+    //public NumberSchema required() {
+    //    isRunRequired = true;
+    //    isRequired = true;
+    //    return this;
+    //}
     /**
      * добавляет в схему ограничение, которое позволяет использовать только положительные числа в качестве значения
      * Этот метод может быть переопределен в подклассах для изменения поведения.
