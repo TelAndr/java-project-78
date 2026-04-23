@@ -3,13 +3,19 @@ package hexlet.code.schemas;
 import java.util.Map;
 import java.util.HashMap;
 
-public class MapSchema<T> {
+//public class MapSchema<T> {
+//public class MapSchema<SELF extends MapSchema<SELF>> {
+public class MapSchema<K, SELF extends MapSchema<K, SELF>> {
     /**
      * добавляет в схему ограничение, которое не позволяет использовать null в качестве значения
      * Этот метод может быть переопределен в подклассах для изменения поведения.
      *
      * @return значение типа исходного класса.
      */
+    @SuppressWarnings("unchecked")
+    protected SELF self() {
+        return (SELF) this;
+    }
     public MapSchema required() {
         isRunRequired = true;
         isRequired = true;
@@ -35,9 +41,17 @@ public class MapSchema<T> {
      * @param mapSchemas входной Map для задания схемы валидации входного значения
      * @return значение типа исходного класса.
      */
-    public MapSchema shape(Map<T, BaseSchema<T>> mapSchemas) {
+    //public MapSchema shape(Map<T, BaseSchema<?>> mapSchemas) {
+    //    this.propertySchemas.putAll(mapSchemas);
+    //    return this;
+    //}
+    //public SELF shape(Map<T, BaseSchema<?, ?>> mapSchemas) {
+    //    this.propertySchemas.putAll(mapSchemas);
+    //    return self();
+    //}
+    public SELF shape(Map<K, BaseSchema<?, ?>> mapSchemas) {
         this.propertySchemas.putAll(mapSchemas);
-        return this;
+        return self();
     }
     /**
      * выполняет проверки по сохранённым параметрам и возвращал true или false.
@@ -93,9 +107,9 @@ public class MapSchema<T> {
         }
 
         // Проверка схем для каждого свойства
-        for (Map.Entry<T, BaseSchema<?>> entry : propertySchemas.entrySet()) {
-            T key = entry.getKey();
-            BaseSchema<?> schema = entry.getValue();
+        for (Map.Entry<K, BaseSchema<?, ?>> entry : propertySchemas.entrySet()) {
+            K key = entry.getKey();
+            BaseSchema<?, ?> schema = entry.getValue();
 
             Object value = mapInput.get(key);
             if (!schema.isValid(value)) {
@@ -167,6 +181,8 @@ public class MapSchema<T> {
     private int curValSizeMap;
     private boolean isRunRequired;
     private boolean isRunSizeof;
-    private Map<T, BaseSchema<?>> propertySchemas = new HashMap();
+    //private Map<T, BaseSchema<?, ?>> propertySchemas = new HashMap();
+    private Map<K, BaseSchema<?, ?>> propertySchemas = new HashMap<>();
+
 }
 
