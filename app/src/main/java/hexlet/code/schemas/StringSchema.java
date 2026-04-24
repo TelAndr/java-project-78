@@ -6,6 +6,12 @@ public class StringSchema extends BaseSchema<String, StringSchema> {
     public StringSchema(Class<String> type) {
         super(type);
     }
+    /**
+     * Возвращает текущий экземпляр объекта, приведённый к типу StringSchema.
+     * Этот метод используется для правильного возвращения типа при цепочечных вызовах методов.
+     *
+     * @return текущий объект в точном типе StringSchema
+     */
     @Override
     protected StringSchema self() {
         return this;
