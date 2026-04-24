@@ -78,7 +78,7 @@ public abstract class BaseSchema<T, S extends BaseSchema<T, S>> {
     Map<String, Predicate<T>> getChecks() {
         return checks;
     }
-    protected boolean required = false;
+    private boolean required = false;
     /**
      * делает возможным использование required извне класса BaseSchema<T>.
      *
