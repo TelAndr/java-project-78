@@ -16,6 +16,12 @@ public class MapSchema<K, SELF extends MapSchema<K, SELF>> {
     protected SELF self() {
         return (SELF) this;
     }
+    /**
+     * добавляет в схему ограничение, которое не позволяет использовать null в качестве значения
+     * Этот метод может быть переопределен в подклассах для изменения поведения.
+     *
+     * @return значение типа исходного класса.
+     */
     public MapSchema required() {
         isRunRequired = true;
         isRequired = true;
