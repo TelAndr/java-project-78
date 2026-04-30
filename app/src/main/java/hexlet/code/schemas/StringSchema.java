@@ -1,10 +1,12 @@
 package hexlet.code.schemas;
 
 import java.util.Scanner;
-//public class StringSchema extends BaseSchema<String> {
-public class StringSchema extends BaseSchema<String, StringSchema> {
-    public StringSchema(Class<String> type) {
-        super(type);
+public class StringSchema extends BaseSchema<String> {
+//public class StringSchema extends BaseSchema<String, StringSchema> {
+    //public StringSchema(Class<String> type) {
+    //    super(type);
+public StringSchema() {
+    super(String.class);
     }
     /**
      * Возвращает текущий экземпляр объекта, приведённый к типу StringSchema.
@@ -12,10 +14,10 @@ public class StringSchema extends BaseSchema<String, StringSchema> {
      *
      * @return текущий объект в точном типе StringSchema
      */
-    @Override
-    protected StringSchema self() {
-        return this;
-    }
+    //@Override
+    //protected StringSchema self() {
+    //    return this;
+    //}
     /**
      * Преобразует тип выходного значения в строковый тип.
      * Этот метод может быть переопределен в подклассах для изменения поведения.
