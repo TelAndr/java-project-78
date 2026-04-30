@@ -5,70 +5,8 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.function.Predicate;
 
-//public abstract class BaseSchema<T> {
-public abstract class BaseSchema<T, S extends BaseSchema<T, S>> {
-    /**
-     * определяет является ли строка непустой или ненулевой.
-     *
-     * @return определяет значение предиката
-     */
-    public Predicate<String> detectNotEmpty() {
-        return s -> s != null && !s.isEmpty();
-    }
-    /**
-     *
-     * проверяет на нулевое значение и на пустоту.
-     *
-     * @return определяет значение предиката
-     */
-    public Predicate<String> detectRequiredString() {
-        return s -> (s == null || s.isEmpty());
-    }
-    /**
-     * проверяет на соответствие минимальной длины строки.
-     *
-     * @param minLen значение минимальной длины
-     * @return определяет значение предиката
-     */
-    public Predicate<String> detectMinLength(int minLen) {
-        return s -> s.length() > minLen;
-    }
-    /**
-     * проверяет на соответствие вхождения конкретной подстроки в строку.
-     *
-     * @param innerSubstring строковое значение подстроки
-     * @return определяет значение предиката
-     */
-    public Predicate<String> detectContains(String innerSubstring) {
-        return s -> (innerSubstring != null && !s.contains(innerSubstring));
-    }
-    /**
-     *
-     * проверяет на нулевое значение.
-     *
-     * @return определяет значение предиката
-     */
-    public Predicate<Number> detectRequiredNumber() {
-        return n -> (n == null);
-    }
-    /**
-     * проверяет на соответствие положительному значению числа.
-     *
-     * @return определяет значение предиката
-     */
-    public Predicate<Integer> detectPositive() {
-        return x -> x <= 0;
-    }
-    /**
-     * проверяет на соответствие вхождению в диапазон от lowerRange до upperRange.
-     *
-     * @param curLowerRange нижняя граница числового диапазона
-     * @param curUpperRange верхняя граница числового диапазона
-     * @return определяет значение предиката
-     */
-    public Predicate<Integer> detectRange(int curLowerRange, int curUpperRange) {
-        return n -> (n < curLowerRange || n > curUpperRange);
-    }
+public abstract class BaseSchema<T> {
+//public abstract class BaseSchema<T, S extends BaseSchema<T, S>> {
     private Map<String, Predicate<T>> checks = new HashMap<>();
     /**
      * делает возможным использование Map<String, Predicate<T>> checks извне класса BaseSchema<T>.
@@ -167,11 +105,18 @@ public abstract class BaseSchema<T, S extends BaseSchema<T, S>> {
      *
      * @return значение типа исходного класса.
      */
-    public S required() {
+    public BaseSchema<T> required() { // S
         this.required = true;
-        return self();
+        //return self();
+        return this;
+        //if (type == String.class) {
+        //    return new StringSchema(String.class);
+        //} else if (type == Integer.class) {
+        //    return new NumberSchema(Integer.class);
+        //}
     }
-    protected abstract S self();
+    //protected abstract BaseSchema<T> self();
+    //protected abstract S self();
     protected abstract T cast(Object value);
     private static Scanner scanner = new Scanner(System.in);
     private T curValue;
