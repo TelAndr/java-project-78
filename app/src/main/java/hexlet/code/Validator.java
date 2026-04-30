@@ -11,7 +11,7 @@ public class Validator {
      * @return возвращает объект StringSchema
      */
     public StringSchema string() {
-        return new StringSchema(String.class);
+        return new StringSchema();
     }
     /**
      * определяет схему NumberSchema. Эта схема используется для валидации чисел.
@@ -19,7 +19,7 @@ public class Validator {
      * @return возвращает объект NumberSchema
      */
     public NumberSchema number() {
-        return new NumberSchema(Integer.class);
+        return new NumberSchema();
     }
     /**
      * определяет схему MapSchema. Эта схема используется для валидации объектов типа Map.
