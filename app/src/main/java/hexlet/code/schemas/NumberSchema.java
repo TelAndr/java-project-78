@@ -3,8 +3,11 @@ package hexlet.code.schemas;
 import java.util.Scanner;
 //public class NumberSchema extends BaseSchema<Integer> {
 public class NumberSchema extends BaseSchema<Integer, NumberSchema> {
-    public NumberSchema(Class<Integer> type) {
-        super(type);
+    //public NumberSchema(Class<Integer> type) {
+    //    super(type);
+    //}
+    public NumberSchema() {
+        super(Integer.class);
     }
     /**
      * Возвращает текущий экземпляр объекта, приведённый к типу NumberSchema.
