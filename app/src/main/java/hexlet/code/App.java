@@ -59,8 +59,8 @@ public class App {
         var mapSchema = validator.map();
 
         // Настраиваем схему Map с shape()
-        Map<String, BaseSchema<String, StringSchema>> schemaString = new HashMap<>();
-        Map<String, BaseSchema<Integer, NumberSchema>> schemaInteger = new HashMap<>();
+        Map<String, BaseSchema<String>> schemaString = new HashMap<>();
+        Map<String, BaseSchema<Integer>> schemaInteger = new HashMap<>();
         schemaString.put("name", validator.string().required());
         schemaInteger.put("age", validator.number().range(minAge, maxAge));
 
