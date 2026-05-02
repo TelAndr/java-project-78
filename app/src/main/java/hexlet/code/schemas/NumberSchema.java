@@ -2,7 +2,7 @@ package hexlet.code.schemas;
 
 import java.util.Scanner;
 //public class NumberSchema extends BaseSchema<Integer> {
-public class NumberSchema extends BaseSchema<Integer, NumberSchema> {
+public class NumberSchema extends BaseSchema<Integer> {
     //public NumberSchema(Class<Integer> type) {
     //    super(type);
     //}
@@ -15,10 +15,10 @@ public class NumberSchema extends BaseSchema<Integer, NumberSchema> {
      *
      * @return текущий объект в точном типе NumberSchema
      */
-    @Override
-    protected NumberSchema self() {
-        return this;
-    }
+    //@Override
+    //protected NumberSchema self() {
+    //    return this;
+    //}
     /**
      * преобразует переданный объект value в тип Integer.
      *
