@@ -22,8 +22,15 @@ public abstract class BaseSchema<T> {
      *
      * @return возвращает значение required
      */
-    boolean getValueRequired() {
+    public boolean getValueRequired() {
         return required;
+    }
+    /**
+     * устанавливает required в конкретное извне класса BaseSchema<T>.
+     *
+     */
+    public void setValueRequired(boolean valRequired) {
+        this.required = valRequired;
     }
     /**
      * добавляет проверку с конкретным названием и конкретный предикат.
@@ -110,9 +117,9 @@ public abstract class BaseSchema<T> {
         //return self();
         return this;
         //if (type == String.class) {
-        //    return new StringSchema(String.class);
+        //    return new StringSchema();
         //} else if (type == Integer.class) {
-        //    return new NumberSchema(Integer.class);
+        //    return new NumberSchema();
         //}
     }
     //protected abstract BaseSchema<T> self();
