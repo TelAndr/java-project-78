@@ -112,16 +112,16 @@ public abstract class BaseSchema<T> {
      *
      * @return значение типа исходного класса.
      */
-    public BaseSchema<T> required() { // S
-        this.required = true;
+    //public BaseSchema<T> required() { // S
+    //    this.required = true;
         //return self();
-        return this;
+    //    return this;
         //if (type == String.class) {
         //    return new StringSchema();
         //} else if (type == Integer.class) {
         //    return new NumberSchema();
         //}
-    }
+    //}
     //protected abstract BaseSchema<T> self();
     //protected abstract S self();
     protected abstract T cast(Object value);
