@@ -55,7 +55,7 @@ public class MapSchema<K, SELF extends MapSchema<K, SELF>> {
     //    this.propertySchemas.putAll(mapSchemas);
     //    return self();
     //}
-    public SELF shape(Map<K, BaseSchema<?, ?>> mapSchemas) {
+    public SELF shape(Map<K, BaseSchema<?>> mapSchemas) {
         this.propertySchemas.putAll(mapSchemas);
         return self();
     }
@@ -113,9 +113,9 @@ public class MapSchema<K, SELF extends MapSchema<K, SELF>> {
         }
 
         // Проверка схем для каждого свойства
-        for (Map.Entry<K, BaseSchema<?, ?>> entry : propertySchemas.entrySet()) {
+        for (Map.Entry<K, BaseSchema<?>> entry : propertySchemas.entrySet()) {
             K key = entry.getKey();
-            BaseSchema<?, ?> schema = entry.getValue();
+            BaseSchema<?> schema = entry.getValue();
 
             Object value = mapInput.get(key);
             if (!schema.isValid(value)) {
@@ -188,7 +188,7 @@ public class MapSchema<K, SELF extends MapSchema<K, SELF>> {
     private boolean isRunRequired;
     private boolean isRunSizeof;
     //private Map<T, BaseSchema<?, ?>> propertySchemas = new HashMap();
-    private Map<K, BaseSchema<?, ?>> propertySchemas = new HashMap<>();
+    private Map<K, BaseSchema<?>> propertySchemas = new HashMap<>();
 
 }
 
