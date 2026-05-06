@@ -7,7 +7,7 @@ public class StringSchema extends BaseSchema<String> {
     //    super(type);
     public StringSchema() {
         super(String.class);
-        }
+    }
     /**
      * Преобразует тип выходного значения в строковый тип.
      * Этот метод может быть переопределен в подклассах для изменения поведения.
