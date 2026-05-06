@@ -28,6 +28,7 @@ public abstract class BaseSchema<T> {
     /**
      * устанавливает required в конкретное извне класса BaseSchema<T>.
      *
+     * @param valRequired входное значеие для установки required
      */
     public void setValueRequired(boolean valRequired) {
         this.required = valRequired;
