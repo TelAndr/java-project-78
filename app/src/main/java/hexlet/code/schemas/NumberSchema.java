@@ -10,16 +10,6 @@ public class NumberSchema extends BaseSchema<Integer> {
         super(Integer.class);
     }
     /**
-     * Возвращает текущий экземпляр объекта, приведённый к типу NumberSchema.
-     * Этот метод используется для правильного возвращения типа при цепочечных вызовах методов.
-     *
-     * @return текущий объект в точном типе NumberSchema
-     */
-    //@Override
-    //protected NumberSchema self() {
-    //    return this;
-    //}
-    /**
      * преобразует переданный объект value в тип Integer.
      *
      * @param value преобразуемое значение
