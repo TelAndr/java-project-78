@@ -31,6 +31,16 @@ public class App {
         boolean falseEmptyString = strSchema.isValid("");
         boolean falseNullString = strSchema.isValid(null);
         //////////////////////////////////////////////////////
+        var numSchema = validator.number();
+        boolean trueNumSimpleDigit = numSchema.isValid(5);
+        boolean trueNullNum = numSchema.isValid(null);
+
+        numSchema.positive();
+        boolean truPozNullNum = numSchema.isValid(null);
+
+        numSchema.required();
+        boolean falsePozNullNum = numSchema.isValid(null);
+        //////////////////////////////////////////////////////
         var schema = validator.map();
 
         boolean truValidNull = schema.isValid(null);
