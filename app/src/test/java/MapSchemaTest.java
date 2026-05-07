@@ -164,7 +164,7 @@ public class MapSchemaTest {
         //Map mapData = new HashMap<String, Integer>();
         var v = new Validator();
         var schema = v.map();
-        Map<String, BaseSchema<String, StringSchema>> schemas = new HashMap<>();
+        Map<String, BaseSchema<String>> schemas = new HashMap<>();
         schemas.put("typeTransport", v.string().required());
         schemas.put("modelTransport", v.string().required().minLength(2));
         schema.shape(schemas);
@@ -181,7 +181,7 @@ public class MapSchemaTest {
         final int maxIntValue = 5;
         final int minVelocity = 10;
         final int maxVelocity = 60;
-        Map<String, BaseSchema<Integer, NumberSchema>> schemas = new HashMap<>();
+        Map<String, BaseSchema<Integer>> schemas = new HashMap<>();
         schemas.put("typeTransport", v.number().required());
         schemas.put("modelTransport", v.number().required().range(minIntValue, maxIntValue));
         schema.shape(schemas);
@@ -198,7 +198,7 @@ public class MapSchemaTest {
         final int maxIntValue = 5;
         final int minVelocity = 10;
         final int maxVelocity = 60;
-        Map<String, BaseSchema<Integer, NumberSchema>> schemas = new HashMap<>();
+        Map<String, BaseSchema<Integer>> schemas = new HashMap<>();
         schemas.put(null, v.number().required());
         schemas.put("modelTransport", v.number().required().range(minIntValue, maxIntValue));
         schema.shape(schemas);
@@ -216,7 +216,7 @@ public class MapSchemaTest {
         final int minVelocity = 10;
         final int maxVelocity = 60;
         final int maxVelocityPlain = 1000;
-        Map<String, BaseSchema<Integer, NumberSchema>> schemas = new HashMap<>();
+        Map<String, BaseSchema<Integer>> schemas = new HashMap<>();
         schemas.put("typeTransport", v.number().required());
         schemas.put("modelTransport", v.number().required().range(minIntValue, maxIntValue));
         schema.shape(schemas);
@@ -234,7 +234,7 @@ public class MapSchemaTest {
         final int maxIntValue = 5;
         final int minVelocity = 10;
         final int maxVelocity = 60;
-        Map<String, BaseSchema<Integer, NumberSchema>> schemas = new HashMap<>();
+        Map<String, BaseSchema<Integer>> schemas = new HashMap<>();
         schema.shape(schemas);
         Map<String, Integer> velocityTransp = new HashMap<>();
         velocityTransp.put("bycicle", minVelocity);
@@ -246,7 +246,7 @@ public class MapSchemaTest {
         var v = new Validator();
         var schema = v.map();
         final int valMinLength = 3;
-        Map<String, BaseSchema<String, StringSchema>> schemas = new HashMap<>();
+        Map<String, BaseSchema<String>> schemas = new HashMap<>();
         schemas.put("typeTransport", v.string().required());
         schemas.put("modelTransport", v.string().required().minLength(valMinLength).contains("Car"));
         schema.shape(schemas);
