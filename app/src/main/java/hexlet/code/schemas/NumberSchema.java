@@ -74,6 +74,7 @@ public class NumberSchema extends BaseSchema<Integer> {
     @Override
     protected boolean validate(Integer curNumber) {
         boolean result = true;
+        boolean isRequired = getValueRequired();
         Integer val = curNumber.intValue();
         if (isRequired && ((curNumber == null))) {
             result = false;
@@ -99,24 +100,8 @@ public class NumberSchema extends BaseSchema<Integer> {
     //        }
     //    }
     //}
-    /**
-     * принимает значение для проверки или использует уже введённое.
-     *
-     * @param value входное значение
-     * @return возвращает результат проверки валидации
-     */
-    @Override
-    public boolean isValid(Object value) {
-        if (value == null) {
-            return !isRequired; // например, null допустим, если не required
-        }
-        if (!(value instanceof Integer)) {
-            return false; // тип не совпадает
-        }
-        return validate((Integer) value);
-    }
     //private Integer curNumber;
-    private boolean isRequired;
+    //private boolean isRequired;
     private boolean isPositive;
     private Integer curLowerRange;
     private Integer curUpperRange;
