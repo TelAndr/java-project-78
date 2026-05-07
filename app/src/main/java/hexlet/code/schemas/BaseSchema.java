@@ -125,6 +125,13 @@ public abstract class BaseSchema<T> {
     //}
     //protected abstract BaseSchema<T> self();
     //protected abstract S self();
+    /**
+     * Преобразует тип выходного значения в соответствующий тип.
+     * Этот метод может быть переопределен в подклассах для изменения поведения.
+     *
+     * @param value искомое значение для преобразования в соответствующий тип
+     * @return значение строкового типа.
+     */
     protected abstract T cast(Object value);
     private static Scanner scanner = new Scanner(System.in);
     private T curValue;
