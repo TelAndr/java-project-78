@@ -31,8 +31,9 @@ public class App {
         boolean falseEmptyString = strSchema.isValid("");
         boolean falseNullString = strSchema.isValid(null);
         //////////////////////////////////////////////////////
+        final int numValContr = 5;
         var numSchema = validator.number();
-        boolean trueNumSimpleDigit = numSchema.isValid(5);
+        boolean trueNumSimpleDigit = numSchema.isValid(numValContr);
         boolean trueNullNum = numSchema.isValid(null);
 
         numSchema.positive();
