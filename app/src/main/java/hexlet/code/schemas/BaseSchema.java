@@ -107,22 +107,6 @@ public abstract class BaseSchema<T> {
         //    }
         //}
     }
-    /**
-     * добавляет в схему ограничение, которое не позволяет использовать null в качестве значения
-     * Этот метод может быть переопределен в подклассах для изменения поведения.
-     *
-     * @return значение типа исходного класса.
-     */
-    //public BaseSchema<T> required() { // S
-    //    this.required = true;
-        //return self();
-    //    return this;
-        //if (type == String.class) {
-        //    return new StringSchema();
-        //} else if (type == Integer.class) {
-        //    return new NumberSchema();
-        //}
-    //}
     //protected abstract BaseSchema<T> self();
     //protected abstract S self();
     /**
