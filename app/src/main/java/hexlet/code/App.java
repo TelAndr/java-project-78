@@ -53,6 +53,11 @@ public class App {
 
         schema.sizeof(2);
         boolean falseValidEmptyMapInp = schema.isValid(new HashMap<>());
+        Map<String, String> actual1 = new HashMap<>();
+        actual1.put("key1", "value1");
+        boolean falseValidKey1 = schema.isValid(actual1);
+        actual1.put("key2", "value2");
+        boolean trueValidKey2 = schema.isValid(actual1);
         //////////////////////////////////////////////////////
         // Создаем схему для строки с минимальной длиной 5 и обязательным полем
         StringSchema stringSchema = validator.string().required().minLength(valMinLength);
