@@ -101,9 +101,9 @@ public class MapSchema<K, SELF extends MapSchema<K, SELF>> {
         //    return true;
         //}
         // Проверка ограничения "обязательность"
-        if (isRunRequired && isRequired && mapInput.isEmpty()) {
-            return false;
-        }
+        //if (isRunRequired && isRequired && mapInput.isEmpty()) {
+        //    return false;
+        //}
         if (isRunSizeof && isSizeof && mapInput.isEmpty()) {
             return false;
         }
