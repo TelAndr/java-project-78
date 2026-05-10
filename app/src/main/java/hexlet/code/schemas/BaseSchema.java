@@ -51,8 +51,8 @@ public abstract class BaseSchema<T> {
      */
     protected abstract boolean validate(T value);
 
-    public BaseSchema(Class<T> type) {
-        this.type = type;
+    public BaseSchema(Class<T> typeClass) {
+        this.type = typeClass;
     }
     /**
      * читает значение из консольного ввода и определяет его тип.
