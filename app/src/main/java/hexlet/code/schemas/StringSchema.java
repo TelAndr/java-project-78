@@ -58,6 +58,7 @@ public class StringSchema extends BaseSchema<String> {
      */
     public StringSchema required() { // S
         setValueRequired(true);
+        addCheck("required", s -> s != null && !s.isEmpty());
         //this.required = true;
         //return self();
         return this;
