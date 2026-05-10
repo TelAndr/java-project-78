@@ -90,12 +90,13 @@ public abstract class BaseSchema<T> {
                 return false;
             }
         }
-        try {
-            T castedValue = cast(value);
-            return validate(castedValue);
-        } catch (ClassCastException e) {
-            return false; // неправильный тип
-        }
+        return true;
+        //try {
+        //    T castedValue = cast(value);
+        //    return validate(castedValue);
+        //} catch (ClassCastException e) {
+        //    return false; // неправильный тип
+        //}
         //while (true) {
         //    System.out.print("Введите данные (обязательно): ");
         //    T input = readInput();
