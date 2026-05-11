@@ -31,8 +31,10 @@ public class App {
         boolean falseEmptyString = strSchema.isValid("");
         boolean falseNullString = strSchema.isValid(null);
         //////////////////////////////////////////////////////
+        final int numValLoverMin = 4;
         final int numValContr = 5;
         final int numValNeg = -10;
+        final int numValPozUpper = 10;
         var numSchema = validator.number();
         boolean trueNumSimpleDigit = numSchema.isValid(numValContr);
         boolean trueNullNum = numSchema.isValid(null);
@@ -43,6 +45,11 @@ public class App {
         numSchema.required();
         boolean falsePozNullNum = numSchema.isValid(null);
         boolean falseValNegNum = numSchema.isValid(numValNeg);
+
+        numSchema.range(numValContr, numValPozUpper);
+        boolean trueRangeLowerVal = numSchema.isValid(numValContr);
+        boolean trueRangeUpperVal = numSchema.isValid(numValPozUpper);
+        boolean falseRangeLowerMinVal = numSchema.isValid(numValLoverMin);
         //////////////////////////////////////////////////////
         var schema = validator.map();
 
