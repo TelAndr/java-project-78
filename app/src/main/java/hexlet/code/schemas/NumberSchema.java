@@ -36,6 +36,7 @@ public class NumberSchema extends BaseSchema<Integer> {
      */
     public NumberSchema required() {
         setValueRequired(true);
+        addCheck("required", n -> n != null);
         return this;
     }
     /**
@@ -47,6 +48,7 @@ public class NumberSchema extends BaseSchema<Integer> {
     public NumberSchema positive() {
         isRunPositive = true;
         isPositive = true;
+        addCheck("positive", n -> n > 0);
         return this;
     }
     /**
@@ -63,6 +65,7 @@ public class NumberSchema extends BaseSchema<Integer> {
         this.curLowerRange = lowerRange;
         this.curUpperRange = upperRange;
         isFallsWithinRange = true;
+        addCheck("range", n -> n >= lowerRange || n <= upperRange);
         return this;
     }
     /**
