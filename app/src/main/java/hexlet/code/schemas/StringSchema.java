@@ -22,34 +22,6 @@ public class StringSchema extends BaseSchema<String> {
         }
         throw new ClassCastException("Value is not a String");
     }
-
-    //public StringSchema required() {
-    //    this.isRunRequired = true;
-    //    this.isRequired = true;
-    //    return this;
-    //}
-    //public StringSchema minLength(int valMinLength) {
-    //    isRunMinLength = true;
-    //    this.curValMinLength = valMinLength;
-    //    isGreaterMinLength = true;
-    //    return this;
-    //}
-    //public StringSchema contains(String curSubstring) {
-    //    isRunContains = true;
-    //    this.innerSubstring = curSubstring;
-    //    isCurContains = true;
-    //    return this;
-    //}
-    /**
-     * добавляет в схему ограничение, которое не позволяет использовать null в качестве значения
-     * Этот метод может быть переопределен в подклассах для изменения поведения.
-     *
-     * @return значение типа исходного класса.
-     */
-    public StringSchema notEmpty() {
-        addCheck("notEmpty", s -> s != null && !s.isEmpty());
-        return this;
-    }
     /**
      * добавляет в схему ограничение, которое не позволяет использовать null в качестве значения
      * Этот метод может быть переопределен в подклассах для изменения поведения.
@@ -59,8 +31,6 @@ public class StringSchema extends BaseSchema<String> {
     public StringSchema required() { // S
         setValueRequired(true);
         addCheck("required", s -> s != null && !s.isEmpty());
-        //this.required = true;
-        //return self();
         return this;
     }
     /**
@@ -86,64 +56,7 @@ public class StringSchema extends BaseSchema<String> {
         addCheck("contains", s -> s != null && s.contains(substring));
         return this;
     }
-    /**
-     * выполняет проверки по сохранённым параметрам и возвращает true или false.
-     *
-     * @param curString преобразуемое значение
-     * @return возвращает результат проверки
-     */
-    @Override
-    protected boolean validate(String curString) {
-        boolean result = true;
-        boolean isRequired = getValueRequired();
-        if (isRequired && (curString == null || curString.isEmpty())) {
-            result = false;
-        }
-        if (isGreaterMinLength &&  (curString.length() < curValMinLength)) {
-            result = false;
-        }
-        if (isCurContains && (innerSubstring != null && !curString.contains(innerSubstring))) {
-            result = false;
-        }
-        ///////////////////////////////////////////////////////////
-        //String checkRequired = "isRequired";
-        //if (isRequired) {
-        //    addCheck(checkRequired, detectRequiredString());
-        //    result = false;
-        //}
-        //if (isGreaterMinLength &&  (curString.length() < curValMinLength)) {
-        //    result = false;
-        //}
-        //if (isCurContains && (innerSubstring != null && !curString.contains(innerSubstring))) {
-        //    result = false;
-        //}
-        return result;
-    }
-    //public boolean isValid() {
-    //    String input;
-    //    while (true) {
-    //        System.out.print("Введите данные (обязательно): ");
-    //        input = scanner.nextLine().trim(); // Убираем пробелы по краям
-    //        curString = input;
-    //        if (validate(curString)) {
-    //            return true;
-    //        } else {
-    //            System.out.println("Некорректный ввод. Повторите снова.");
-    //        }
-    //    }
-    //}
 
-    //@Override
-    //public boolean isValid(Object value) {
-    //    if (value == null) {
-    //        return !isRequired; // например, null допустим, если не required
-    //    }
-    //    if (!(value instanceof String)) {
-    //        return false; // тип не совпадает
-    //    }
-    //    return validate((String) value);
-    //}
-    //private String curString;
     private int curValMinLength;
     private String innerSubstring;
     //private boolean isRequired = false;
