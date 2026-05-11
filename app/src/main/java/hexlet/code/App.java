@@ -41,6 +41,7 @@ public class App {
 
         numSchema.required();
         boolean falsePozNullNum = numSchema.isValid(null);
+        boolean falseValNegNum = numSchema.isValid(-10);
         //////////////////////////////////////////////////////
         var schema = validator.map();
 
