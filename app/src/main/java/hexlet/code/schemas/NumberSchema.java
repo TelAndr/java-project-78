@@ -65,7 +65,7 @@ public class NumberSchema extends BaseSchema<Integer> {
         this.curLowerRange = lowerRange;
         this.curUpperRange = upperRange;
         isFallsWithinRange = true;
-        addCheck("range", n -> n >= lowerRange || n <= upperRange);
+        addCheck("range", n -> n >= lowerRange && n <= upperRange);
         return this;
     }
     /**
