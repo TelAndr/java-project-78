@@ -22,12 +22,6 @@ public class NumberSchema extends BaseSchema<Integer> {
         }
         throw new ClassCastException("Value is not a Number");
     }
-
-    //public NumberSchema required() {
-    //    isRunRequired = true;
-    //    isRequired = true;
-    //    return this;
-    //}
     /**
      * добавляет в схему ограничение, которое не позволяет использовать null в качестве значения
      * Этот метод может быть переопределен в подклассах для изменения поведения.
@@ -68,43 +62,6 @@ public class NumberSchema extends BaseSchema<Integer> {
         addCheck("range", n -> n >= lowerRange && n <= upperRange);
         return this;
     }
-    /**
-     * выполняет проверки по сохранённым параметрам и возвращает true или false.
-     *
-     * @param curNumber преобразуемое значение
-     * @return возвращает результат проверки
-     */
-    @Override
-    protected boolean validate(Integer curNumber) {
-        boolean result = true;
-        boolean isRequired = getValueRequired();
-        Integer val = curNumber.intValue();
-        if (isRequired && ((curNumber == null))) {
-            result = false;
-        }
-        if (isPositive &&  (val <= 0)) {
-            result = false;
-        }
-        if (isFallsWithinRange && (val < curLowerRange || val > curUpperRange)) {
-            result = false;
-        }
-        return result;
-    }
-    //public boolean isValid() {
-    //    int input;
-    //    while (true) {
-    //        System.out.print("Введите данные (обязательно): ");
-    //        input = scanner.nextInt(); // Убираем пробелы по краям
-    //        curNumber = input;
-    //        if (validate(curNumber)) {
-    //            return true;
-    //        } else {
-    //            System.out.println("Некорректный ввод. Повторите снова.");
-    //        }
-    //    }
-    //}
-    //private Integer curNumber;
-    //private boolean isRequired;
     private boolean isPositive;
     private Integer curLowerRange;
     private Integer curUpperRange;
