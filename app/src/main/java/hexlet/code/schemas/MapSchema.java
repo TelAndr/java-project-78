@@ -60,23 +60,6 @@ public class MapSchema<K, SELF extends MapSchema<K, SELF>> {
         return self();
     }
     /**
-     * выполняет проверки по сохранённым параметрам и возвращал true или false.
-     * Этот метод может быть переопределен в подклассах для изменения поведения.
-     *
-     * @param curMap входной Map для проверки валидности ключей и значений
-     * @return значение типа исходного класса.
-     */
-    public boolean validate(Map curMap) {
-        boolean result = true;
-        if (isRequired && (curMap == null || curMap.isEmpty())) {
-            result = false;
-        }
-        if (isSizeof &&  (curMap.size() != curValSizeMap)) {
-            result = false;
-        }
-        return result;
-    }
-    /**
      * принимает значение для проверки или использует уже введённое.
      * Этот метод может быть переопределен в подклассах для изменения поведения.
      *
@@ -125,63 +108,6 @@ public class MapSchema<K, SELF extends MapSchema<K, SELF>> {
 
         return true; // все проверки прошли
     }
-    //public boolean isValid(Map<?, ?> inputMap) {
-        //curMap = new HashMap<>();
-        //Map<String, String> input = new HashMap<>();
-        //while (true) {
-        //    System.out.print("Введите данные (обязательно): ");
-            //input = scanner.nextInt().trim(); // Убираем пробелы по краям
-            //Map<String, MutableObject> deepCopiedMap = new HashMap<>();
-        //    for (Map.Entry<String, MutableObject> entry : input.entrySet()) {
-        //        curMap.put(entry.getKey(), entry.getValue().copy());
-        //    }
-        //    if (validate(curMap)) {
-        //        return true;
-        //    } else {
-        //        System.out.println("Некорректный ввод. Повторите снова.");
-        //    }
-        //}
-    //    if (inputMap == null) {
-    //        if (isRequired) {
-    //            return false;
-    //        } else {
-                // не обязательно, значит и null —валид
-    //            return true;
-    //        }
-    //    }
-        // Проверка ограничений
-    //    if (isRunRequired && isRequired && (inputMap == null || inputMap.isEmpty())) {
-    //        return false;
-    //    }
-
-    //    if (isRunSizeof && isSizeof && (inputMap.size() != curValSizeMap)) {
-    //        return false;
-    //    }
-    //    return true;
-    //}
-    //public boolean isValid(Map<?, ?> data) {
-    //    if (data == null) {
-            // В зависимости от логики, если require() — дань,
-            // можно возвращать false, если data null и нужно требовать непустой объект.
-            // Предположим, что null считается валидным, если не задано required()
-    //        if (isRequired) {
-    //            return false;
-    //        }
-    //        return true;
-    //    }
-    //    for (Map.Entry<String, BaseSchema<?>> entry : propertySchemas.entrySet()) {
-    //        String key = entry.getKey();
-    //        hexlet.code.schemas.BaseSchema<?> schema = entry.getValue();
-
-    //        Object value = data.get(key);
-            // Передача value в isValid схему, если она существует
-    //        if (!schema.isValid(value)) {
-    //            return false;
-    //        }
-    //    }
-    //    return true;
-    //}
-    //private Map<String, String> curMap;
     private boolean isRequired;
     private boolean isSizeof;
     private int curValSizeMap;
