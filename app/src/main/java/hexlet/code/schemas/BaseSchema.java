@@ -43,13 +43,6 @@ public abstract class BaseSchema<T> {
         checks.put(name, validate);
     }
     //protected  abstract T castValue(Object value);
-    /**
-     * выполняет проверки по сохранённым параметрам и возвращает true или false.
-     *
-     * @param value преобразуемое значение
-     * @return возвращает результат проверки
-     */
-    protected abstract boolean validate(T value);
 
     public BaseSchema(Class<T> typeClass) {
         this.type = typeClass;
@@ -79,9 +72,6 @@ public abstract class BaseSchema<T> {
      * @return возвращает результат проверки валидации
      */
     public boolean isValid(Object value) {
-        //if (value == null) {
-        //    return !isRequired; // nullable, если не обязательно
-        //}
         if (value == null) {
             return !required; // или вернем false, если обязательно
         }
@@ -91,22 +81,6 @@ public abstract class BaseSchema<T> {
             }
         }
         return true;
-        //try {
-        //    T castedValue = cast(value);
-        //    return validate(castedValue);
-        //} catch (ClassCastException e) {
-        //    return false; // неправильный тип
-        //}
-        //while (true) {
-        //    System.out.print("Введите данные (обязательно): ");
-        //    T input = readInput();
-        //    curValue = input;
-        //    if (validate(curValue)) {
-        //        return true;
-        //    } else {
-        //        System.out.println("Некорректный ввод. Повторите снова.");
-        //    }
-        //}
     }
     //protected abstract BaseSchema<T> self();
     //protected abstract S self();
