@@ -8,7 +8,7 @@ plugins {
 
 sonar {
     properties {
-        property("sonar.projectKey", "TelAndr_java-project-71")
+        property("sonar.projectKey", "TelAndr_java-project-78")
         property("sonar.organization", "telandr1987")
         property("sonar.host.url", "https://sonarcloud.io")
     }
