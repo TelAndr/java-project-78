@@ -16,7 +16,7 @@ sonar {
 
 sonarqube {
     properties {
-        property ("sonar.projectKey", "TelAndr_java-project-71")
+        property ("sonar.projectKey", "TelAndr_java-project-78")
         property ("sonar.host.url", "https://sonarcloud.io")
         property ("sonar.login", "${System.getenv("SONAR_TOKEN")}") // Используйте переменную окружения для вашего токена
         property ("sonar.coverage.jacoco.xmlReportPaths", file("build/reports/jacoco/test/jacocoTestReport.xml"))
