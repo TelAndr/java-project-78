@@ -1,6 +1,6 @@
 plugins {
     id("java")
-    id("application")
+    //id("application")
     id ("checkstyle")
     id("org.sonarqube") version "6.2.0.5505"
     id("jacoco")
@@ -30,10 +30,10 @@ repositories {
     mavenCentral()
 }
 
-application {
+//application {
     // Входная точка
-    mainClass.set("hexlet.code.App")
-}
+//    mainClass.set("hexlet.code.App")
+//}
 
 dependencies {
     implementation("org.projectlombok:lombok:1.18.26")
