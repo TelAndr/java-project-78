@@ -1,6 +1,5 @@
 package hexlet.code.schemas;
 
-import java.util.Scanner;
 public class StringSchema extends BaseSchema<String> {
 //public class StringSchema extends BaseSchema<String, StringSchema> {
     //public StringSchema(Class<String> type) {
@@ -56,14 +55,4 @@ public class StringSchema extends BaseSchema<String> {
         addCheck("contains", s -> s != null && s.contains(substring));
         return this;
     }
-
-    private int curValMinLength;
-    private String innerSubstring;
-    //private boolean isRequired = false;
-    private boolean isGreaterMinLength = false;
-    private boolean isCurContains;
-    private boolean isRunRequired;
-    private boolean isRunMinLength;
-    private boolean isRunContains;
-    private static Scanner scanner = new Scanner(System.in);
 }
