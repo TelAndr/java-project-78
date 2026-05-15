@@ -40,8 +40,6 @@ public class NumberSchema extends BaseSchema<Integer> {
      * @return значение типа исходного класса.
      */
     public NumberSchema positive() {
-        isRunPositive = true;
-        isPositive = true;
         addCheck("positive", n -> n > 0);
         return this;
     }
@@ -55,19 +53,7 @@ public class NumberSchema extends BaseSchema<Integer> {
      * @return значение типа исходного класса.
      */
     public  NumberSchema range(int lowerRange, int upperRange) {
-        isRunRange = true;
-        this.curLowerRange = lowerRange;
-        this.curUpperRange = upperRange;
-        isFallsWithinRange = true;
         addCheck("range", n -> n >= lowerRange && n <= upperRange);
         return this;
     }
-    private boolean isPositive;
-    private Integer curLowerRange;
-    private Integer curUpperRange;
-    private boolean isFallsWithinRange;
-    private boolean isRunRequired;
-    private boolean isRunPositive;
-    private boolean isRunRange;
-    private static Scanner scanner = new Scanner(System.in);
 }
