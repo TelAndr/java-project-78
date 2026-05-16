@@ -1,6 +1,6 @@
 package hexlet.code.schemas;
 
-import java.util.Scanner;
+//import java.util.Scanner;
 //public class NumberSchema extends BaseSchema<Integer> {
 public class NumberSchema extends BaseSchema<Integer> {
     //public NumberSchema(Class<Integer> type) {
