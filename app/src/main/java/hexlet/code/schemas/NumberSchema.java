@@ -6,21 +6,8 @@ public class NumberSchema extends BaseSchema<Integer> {
     //public NumberSchema(Class<Integer> type) {
     //    super(type);
     //}
-    public NumberSchema() {
-        super(Integer.class);
-    }
-    /**
-     * преобразует переданный объект value в тип Integer.
-     *
-     * @param value преобразуемое значение
-     * @return возвращает результат преобразования в тип Integer
-     */
-    @Override
-    protected Integer cast(Object value) {
-        if (value instanceof Integer) {
-            return (Integer) value;
-        }
-        throw new ClassCastException("Value is not a Number");
+    public NumberSchema(Class<Integer> type) {
+        super(type);
     }
     /**
      * добавляет в схему ограничение, которое не позволяет использовать null в качестве значения
