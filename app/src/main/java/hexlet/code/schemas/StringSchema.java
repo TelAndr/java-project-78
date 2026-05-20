@@ -4,22 +4,8 @@ public class StringSchema extends BaseSchema<String> {
 //public class StringSchema extends BaseSchema<String, StringSchema> {
     //public StringSchema(Class<String> type) {
     //    super(type);
-    public StringSchema() {
-        super(String.class);
-    }
-    /**
-     * Преобразует тип выходного значения в строковый тип.
-     * Этот метод может быть переопределен в подклассах для изменения поведения.
-     *
-     * @param value искомое значение для преобразования в String
-     * @return значение строкового типа.
-     */
-    @Override
-    protected String cast(Object value) {
-        if (value instanceof String) {
-            return (String) value;
-        }
-        throw new ClassCastException("Value is not a String");
+    public StringSchema(Class<String> type) {
+        super(type);
     }
     /**
      * добавляет в схему ограничение, которое не позволяет использовать null в качестве значения
