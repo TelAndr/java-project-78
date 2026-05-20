@@ -2,7 +2,6 @@ package hexlet.code.schemas;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Scanner;
 import java.util.function.Predicate;
 
 public abstract class BaseSchema<T> {
@@ -17,6 +16,7 @@ public abstract class BaseSchema<T> {
         return checks;
     }
     private boolean required = false;
+    private final Class<T> type;
     /**
      * делает возможным использование required извне класса BaseSchema<T>.
      *
@@ -42,28 +42,9 @@ public abstract class BaseSchema<T> {
     protected final void addCheck(String name, Predicate<T> validate) {
         checks.put(name, validate);
     }
-    //protected  abstract T castValue(Object value);
 
     public BaseSchema(Class<T> typeClass) {
         this.type = typeClass;
-    }
-    /**
-     * читает значение из консольного ввода и определяет его тип.
-     *
-     * @return возвращает тип значения из консольного ввода
-     */
-    public T readInput() {
-        if (type == String.class) {
-            return type.cast(scanner.nextLine());
-        } else if (type == Integer.class) {
-            return type.cast(scanner.nextInt());
-        } else if (type == Double.class) {
-            return type.cast(scanner.nextDouble());
-        } else if (type == Boolean.class) {
-            return type.cast(scanner.nextBoolean());
-        } else {
-            throw new IllegalArgumentException("Тип не поддерживается: " + type);
-        }
     }
     /**
      * принимает значение для проверки или использует уже введённое.
@@ -75,24 +56,21 @@ public abstract class BaseSchema<T> {
         if (value == null) {
             return !required; // или вернем false, если обязательно
         }
+        // Если ожидаемый тип задан (type != null), проверяем соответствие типа
+        if (type != null && !type.isInstance(value)) {
+            // Особый случай: для MapSchema мы храним тип как Map<?, ?>, но проверка type.isInstance обрабатывает это корректно
+            // Если тип не совпадает — это невалидно
+            return false;
+        }
         for (Predicate<T> check : checks.values()) {
-            if (!check.test((T) value)) {
+            try {
+                if (!check.test((T) value)) {
+                    return false;
+                }
+            } catch (ClassCastException e) {
                 return false;
             }
         }
         return true;
     }
-    //protected abstract BaseSchema<T> self();
-    //protected abstract S self();
-    /**
-     * Преобразует тип выходного значения в соответствующий тип.
-     * Этот метод может быть переопределен в подклассах для изменения поведения.
-     *
-     * @param value искомое значение для преобразования в соответствующий тип
-     * @return значение строкового типа.
-     */
-    protected abstract T cast(Object value);
-    private static Scanner scanner = new Scanner(System.in);
-    private T curValue;
-    private final Class<T> type;
 }
