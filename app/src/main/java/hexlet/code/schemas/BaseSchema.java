@@ -58,7 +58,8 @@ public abstract class BaseSchema<T> {
         }
         // Если ожидаемый тип задан (type != null), проверяем соответствие типа
         if (type != null && !type.isInstance(value)) {
-            // Особый случай: для MapSchema мы храним тип как Map<?, ?>, но проверка type.isInstance обрабатывает это корректно
+            // Особый случай: для MapSchema мы храним тип как Map<?, ?>,
+            // но проверка type.isInstance обрабатывает это корректно
             // Если тип не совпадает — это невалидно
             return false;
         }
