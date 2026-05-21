@@ -27,6 +27,7 @@ public class MapSchema<K, SELF extends MapSchema<K, SELF>> extends BaseSchema<Ma
      * @return значение типа исходного класса.
      */
     public MapSchema required() {
+        setValueRequired(true);
         addCheck("required", m -> m != null);
         return this;
     }
