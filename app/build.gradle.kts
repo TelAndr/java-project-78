@@ -23,6 +23,32 @@ sonarqube {
     }
 }
 
+jacoco {    toolVersion = "0.8.8"}
+tasks.jacocoTestReport {
+    dependsOn(tasks.test)
+    reports {
+        xml.required.set(true)
+        html.required.set(true)
+        csv.required.set(false)
+    }
+}
+
+tasks.jacocoTestCoverageVerification {
+    dependsOn(tasks.test)
+    violationRules {
+        rule {
+            limit {
+                counter = "LINE"
+                value = "COVERED_RATIO"
+                minimum = 0.80.toBigDecimal()
+            }
+        }
+    }
+}
+tasks.check {
+    dependsOn(tasks.jacocoTestCoverageVerification)
+}
+
 group = "hexlet.code"
 version = "1.0-SNAPSHOT"
 
