@@ -23,7 +23,7 @@ sonarqube {
     }
 }
 
-jacoco {    toolVersion = "0.9.13"}
+jacoco {    toolVersion = "0.8.11"}
 tasks.jacocoTestReport {
     dependsOn(tasks.test)
     reports {
