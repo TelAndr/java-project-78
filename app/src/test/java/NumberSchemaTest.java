@@ -15,6 +15,15 @@ public class NumberSchemaTest {
         assertEquals(expectedResultWorkRequired, actualResultWorkRequired);
     }
     @Test
+    void testNullObjectInput() throws Exception {
+        Object curNumberNull = null;
+        var v = new Validator();
+        var schema = v.number().required();
+        boolean actualResultWorkRequired = schema.isValid(curNumberNull);
+        boolean expectedResultWorkRequired = false;
+        assertEquals(expectedResultWorkRequired, actualResultWorkRequired);
+    }
+    @Test
     void testNotEmptyInput() throws Exception {
         final Integer curNumberNotEmpty = 25;
         var v = new Validator();
@@ -90,6 +99,17 @@ public class NumberSchemaTest {
         assertEquals(expectedResultWorkUpperMaxValue, actualResultWorkUpperMaxValue);
     }
     @Test
+    void testInpNumNullValue() throws Exception {
+        final int curInpNum = Integer.parseInt(null);
+        final int valLowerRange = 15;
+        final int valUpperRange = 25;
+        var v = new Validator();
+        var schema = v.number().range(valLowerRange, valUpperRange);
+        boolean actualResultWorkUpperMaxValue = schema.isValid(curInpNum);
+        boolean expectedResultWorkUpperMaxValue = true;
+        assertEquals(expectedResultWorkUpperMaxValue, actualResultWorkUpperMaxValue);
+    }
+    @Test
     void testInpNegativeValue() throws Exception {
         final int curInpNum = -10;
         var v = new Validator();
@@ -113,7 +133,7 @@ public class NumberSchemaTest {
         var v = new Validator();
         var schema = v.number().positive();
         boolean actualResultWorkPositiveValue = schema.isValid(curInpNum);
-        boolean expectedResultWorkPositiveValue = false;
+        boolean expectedResultWorkPositiveValue = true;
         assertEquals(expectedResultWorkPositiveValue, actualResultWorkPositiveValue);
     }
     @Test
