@@ -138,7 +138,12 @@ public class NumberSchemaTest {
     }
     @Test
     void testInpCycleValue() throws Exception {
-        int curInpNumFirst = Integer.parseInt(null);
+        int curInpNumFirst;
+        try {
+            curInpNumFirst = Integer.parseInt(null);
+        } catch (NumberFormatException | NullPointerException e) {
+            curInpNumFirst = 0;
+        }
         String curInpNumSecond = "ten";
         final int curInpNumThird = 15;
         var v = new Validator();
