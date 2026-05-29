@@ -270,4 +270,11 @@ public class MapSchemaTest {
         schema.sizeof(2);
         assertThat(schema.isValid(new HashMap<>())).isFalse();
     }
+    @Test
+    void testInputNotMap() throws Exception {
+        var v = new Validator();
+        var schema = v.map();
+        int inputIntValue = 5;
+        assertThat(schema.isValid(inputIntValue)).isFalse();
+    }
 }
