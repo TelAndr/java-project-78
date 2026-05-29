@@ -274,7 +274,7 @@ public class MapSchemaTest {
     void testInputNotMap() throws Exception {
         var v = new Validator();
         var schema = v.map();
-        int inputIntValue = 5;
+        final int inputIntValue = 5;
         assertThat(schema.isValid(inputIntValue)).isFalse();
     }
 }
