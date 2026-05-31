@@ -278,9 +278,11 @@ public class MapSchemaTest {
         assertThat(schema.isValid(inputIntValue)).isFalse();
     }
     @Test
-    void shapeValidatesNestedSchemas_andHandlesMissingKey() {
+    void shapeValidatesNestedSchemasHandlesMissingKey() {
         var v = new Validator();
         var schema = v.map();
+        final int numAge = 30;
+        final int numBadAge = -5;
 
         Map<String, BaseSchema<?>> shapes = new HashMap<>();
         shapes.put("name", v.string().required().minLength(2));
@@ -289,7 +291,7 @@ public class MapSchemaTest {
 
         Map<String, Object> good = new HashMap<>();
         good.put("name", "Al");
-        good.put("age", 30);
+        good.put("age", numAge);
         assertThat(schema.isValid(good)).isTrue();
 
         Map<String, Object> missingAge = new HashMap<>();
@@ -299,12 +301,12 @@ public class MapSchemaTest {
 
         Map<String, Object> badName = new HashMap<>();
         badName.put("name", "A"); // too short
-        badName.put("age", 30);
+        badName.put("age", numAge);
         assertThat(schema.isValid(badName)).isFalse();
 
         Map<String, Object> badAge = new HashMap<>();
         badAge.put("name", "Al");
-        badAge.put("age", -5); // negative
+        badAge.put("age", numBadAge); // negative
         assertThat(schema.isValid(badAge)).isFalse();
     }
     @Test
