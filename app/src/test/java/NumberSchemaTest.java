@@ -163,4 +163,13 @@ public class NumberSchemaTest {
         boolean expectedResultWorkNotNumberValue = false;
         assertEquals(expectedResultWorkNotNumberValue, actualResultWorkNotNumberValue);
     }
+    @Test
+    void testNullInputNoRequired() throws Exception {
+        int curNumberNull = Integer.parseInt(null);
+        var v = new Validator();
+        var schema = v.number();
+        boolean actualResultWorkRequired = schema.isValid(curNumberNull);
+        boolean expectedResultWorkRequired = true;
+        assertEquals(expectedResultWorkRequired, actualResultWorkRequired);
+    }
 }
