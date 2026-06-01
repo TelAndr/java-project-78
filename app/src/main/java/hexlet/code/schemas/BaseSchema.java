@@ -18,6 +18,14 @@ public abstract class BaseSchema<T> {
         this.required = valRequired;
     }
     /**
+     * делает возможным использование required извне класса BaseSchema<T>.
+     *
+     * @return возвращает значение required
+     */
+    public boolean getValueRequired() {
+        return required;
+    }
+    /**
      * добавляет проверку с конкретным названием и конкретный предикат.
      *
      * @param name название проверки
