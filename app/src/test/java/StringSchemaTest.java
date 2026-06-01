@@ -1,5 +1,6 @@
 import hexlet.code.Validator;
-//import hexlet.code.schemas.StringSchema;
+import hexlet.code.schemas.StringSchema;
+import hexlet.code.schemas.BaseSchema;
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.assertEquals;
@@ -153,5 +154,19 @@ public class StringSchemaTest {
         boolean actualResultWorkRequired = schema.isValid(curStringNull);
         boolean expectedResultWorkRequired = true;
         assertEquals(expectedResultWorkRequired, actualResultWorkRequired);
+    }
+    @Test
+    void setValueRequired_setsRequiredTrue() {
+        StringSchema sSch = new StringSchema(String.class);
+        boolean expectedRequired = true;
+        sSch.setValueRequired(true);
+        assertEquals(sSch.getValueRequired(), expectedRequired);
+    }
+    @Test
+    void setValueRequired_setsRequiredFalse() {
+        StringSchema sSch = new StringSchema(String.class);
+        boolean expectedRequired = false;
+        sSch.setValueRequired(false);
+        assertEquals(sSch.getValueRequired(), expectedRequired);
     }
 }
