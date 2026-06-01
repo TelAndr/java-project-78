@@ -7,24 +7,8 @@ import java.util.function.Predicate;
 public abstract class BaseSchema<T> {
 //public abstract class BaseSchema<T, S extends BaseSchema<T, S>> {
     private Map<String, Predicate<T>> checks = new HashMap<>();
-    /**
-     * делает возможным использование Map<String, Predicate<T>> checks извне класса BaseSchema<T>.
-     *
-     * @return возвращает значение Map<String, Predicate<T>> checks
-     */
-    Map<String, Predicate<T>> getChecks() {
-        return checks;
-    }
     private boolean required = false;
     private final Class<T> type;
-    /**
-     * делает возможным использование required извне класса BaseSchema<T>.
-     *
-     * @return возвращает значение required
-     */
-    public boolean getValueRequired() {
-        return required;
-    }
     /**
      * устанавливает required в конкретное извне класса BaseSchema<T>.
      *
