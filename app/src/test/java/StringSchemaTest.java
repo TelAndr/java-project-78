@@ -169,4 +169,15 @@ public class StringSchemaTest {
         sSch.setValueRequired(false);
         assertEquals(sSch.getValueRequired(), expectedRequired);
     }
+    @Test
+    void testInpStrRepeatCallMinLengthStr() throws Exception {
+        String curInpString = "This is test string";
+        final int inpStrLengthBegin = 25;
+        final int inpStrLengthEnd = 15;
+        var v = new Validator();
+        var schema = v.string().minLength(inpStrLengthBegin).minLength(inpStrLengthEnd);
+        boolean actualResultWorkMinLength = schema.isValid(curInpString);
+        boolean expectedResultWorkMinLength = false;
+        assertEquals(expectedResultWorkMinLength, actualResultWorkMinLength);
+    }
 }
