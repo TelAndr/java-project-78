@@ -32,7 +32,6 @@ public class BaseSchemaEdgeCasesTest {
     }
     @Test
     void testAccumulatePredicatesChecks() throws Exception {
-        String curInpString = "This is test string";
         String curInpSubString = "test";
         final int inpStrLength = 25;
         final int sizeChecksExpected = 3;
@@ -40,5 +39,16 @@ public class BaseSchemaEdgeCasesTest {
         var schema = v.string().required().minLength(inpStrLength).contains(curInpSubString);
         int sizeChecksActual = schema.getChecks().size();
         assertEquals(sizeChecksExpected, sizeChecksActual);
+    }
+    @Test
+    void testNotEmptyTrueMinLengthFalseContains() throws Exception {
+        String curInpString = "This is test string";
+        String curInpSubString = "tess";
+        final int inpStrLength = 25;
+        var v = new Validator();
+        var schema = v.string().required().minLength(inpStrLength).contains(curInpSubString);
+        boolean actualResultWorkRequiredMinLengthContains = schema.isValid(curInpString);
+        boolean expectedResultWorkRequiredMinLengthContains = false;
+        assertEquals(expectedResultWorkRequiredMinLengthContains, actualResultWorkRequiredMinLengthContains);
     }
 }
