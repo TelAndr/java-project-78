@@ -10,6 +10,14 @@ public abstract class BaseSchema<T> {
     private boolean required = false;
     private final Class<T> type;
     /**
+     * делает возможным использование Map<String, Predicate<T>> checks извне класса BaseSchema<T>.
+     *
+     * @return возвращает значение Map<String, Predicate<T>> checks
+     */
+    public Map<String, Predicate<T>> getChecks() {
+        return checks;
+    }
+    /**
      * устанавливает required в конкретное извне класса BaseSchema<T>.
      *
      * @param valRequired входное значеие для установки required
