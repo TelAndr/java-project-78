@@ -51,4 +51,22 @@ public class BaseSchemaEdgeCasesTest {
         boolean expectedResultWorkRequiredMinLengthContains = false;
         assertEquals(expectedResultWorkRequiredMinLengthContains, actualResultWorkRequiredMinLengthContains);
     }
+    @Test
+    void testErrorTypeInput() throws Exception {
+        final int curIntValue = 15;
+        var v = new Validator();
+        var schema = v.string().required();
+        boolean actualResultWorkRequired = schema.isValid(curIntValue);
+        boolean expectedResultWorkRequired = false;
+        assertEquals(expectedResultWorkRequired, actualResultWorkRequired);
+    }
+    @Test
+    void testCheckSetGetValueRequired() throws Exception {
+        var v = new Validator();
+        var schema = v.string();
+        boolean expectedRequired = true;
+        schema.setValueRequired(true);
+        boolean actualRequired = schema.getValueRequired();
+        assertEquals(expectedRequired, actualRequired);
+    }
 }
