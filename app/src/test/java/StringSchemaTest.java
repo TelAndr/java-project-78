@@ -55,7 +55,7 @@ public class StringSchemaTest {
     @Test
     void testInpStrNullControlStr() throws Exception {
         String curInpString = "This is test string";
-        final int inpStrLength = Integer.parseInt(null);
+        Integer inpStrLength = null;
         var v = new Validator();
         var schema = v.string().minLength(inpStrLength);
         boolean actualResultWorkMinLength = schema.isValid(curInpString);
@@ -173,6 +173,17 @@ public class StringSchemaTest {
         var schema = v.string().required().minLength(inpStrLength).contains(curInpSubString);
         boolean actualResultWorkRequiredMinLengthContains = schema.isValid(curInpString);
         boolean expectedResultWorkRequiredMinLengthContains = false;
+        assertEquals(expectedResultWorkRequiredMinLengthContains, actualResultWorkRequiredMinLengthContains);
+    }
+    @Test
+    void testNotEmptyTrueMinLengthFalseContains() throws Exception {
+        String curInpString = "This is test string";
+        String curInpSubString = "tess";
+        final int inpStrLength = 25;
+        var v = new Validator();
+        var schema = v.string().required().minLength(inpStrLength).contains(curInpSubString);
+        boolean actualResultWorkRequiredMinLengthContains = schema.isValid(curInpString);
+        boolean expectedResultWorkRequiredMinLengthContains = true;
         assertEquals(expectedResultWorkRequiredMinLengthContains, actualResultWorkRequiredMinLengthContains);
     }
     @Test
