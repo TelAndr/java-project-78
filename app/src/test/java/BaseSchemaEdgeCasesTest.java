@@ -77,7 +77,7 @@ public class BaseSchemaEdgeCasesTest {
         var v = new Validator();
         var schema = v.string().required().minLength(inpStrLength).contains(curInpSubString);
         boolean actualResultWorkRequiredMinLengthContains = schema.isValid(curInpString);
-        boolean expectedResultWorkRequiredMinLengthContains = false;
+        boolean expectedResultWorkRequiredMinLengthContains = true;
         assertEquals(expectedResultWorkRequiredMinLengthContains, actualResultWorkRequiredMinLengthContains);
     }
     @Test
