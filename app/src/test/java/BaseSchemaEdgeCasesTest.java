@@ -69,4 +69,37 @@ public class BaseSchemaEdgeCasesTest {
         boolean actualRequired = schema.getValueRequired();
         assertEquals(expectedRequired, actualRequired);
     }
+    @Test
+    void testAllPredicatesWork() throws Exception {
+        String curInpString = "hexlet";
+        String curInpSubString = "hex";
+        final int inpStrLength = 5;
+        var v = new Validator();
+        var schema = v.string().required().minLength(inpStrLength).contains(curInpSubString);
+        boolean actualResultWorkRequiredMinLengthContains = schema.isValid(curInpString);
+        boolean expectedResultWorkRequiredMinLengthContains = false;
+        assertEquals(expectedResultWorkRequiredMinLengthContains, actualResultWorkRequiredMinLengthContains);
+    }
+    @Test
+    void testTwoPredicatesWorkOneNotWork() throws Exception {
+        String curInpString = "hello";
+        String curInpSubString = "hex";
+        final int inpStrLength = 5;
+        var v = new Validator();
+        var schema = v.string().required().minLength(inpStrLength).contains(curInpSubString);
+        boolean actualResultWorkRequiredMinLengthContains = schema.isValid(curInpString);
+        boolean expectedResultWorkRequiredMinLengthContains = false;
+        assertEquals(expectedResultWorkRequiredMinLengthContains, actualResultWorkRequiredMinLengthContains);
+    }
+    @Test
+    void testAllPredicatesNotWork() throws Exception {
+        String curInpString = "";
+        String curInpSubString = "hex";
+        final int inpStrLength = 5;
+        var v = new Validator();
+        var schema = v.string().required().minLength(inpStrLength).contains(curInpSubString);
+        boolean actualResultWorkRequiredMinLengthContains = schema.isValid(curInpString);
+        boolean expectedResultWorkRequiredMinLengthContains = false;
+        assertEquals(expectedResultWorkRequiredMinLengthContains, actualResultWorkRequiredMinLengthContains);
+    }
 }
