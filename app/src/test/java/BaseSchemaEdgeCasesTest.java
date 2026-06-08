@@ -102,4 +102,26 @@ public class BaseSchemaEdgeCasesTest {
         boolean expectedResultWorkRequiredMinLengthContains = false;
         assertEquals(expectedResultWorkRequiredMinLengthContains, actualResultWorkRequiredMinLengthContains);
     }
+    @Test
+    void testStrRepeatCallMinLength() throws Exception {
+        String curInpString = "hexlet";
+        final int inpStrLengthBegin = 6;
+        final int inpStrLengthEnd = 3;
+        var v = new Validator();
+        var schema = v.string().minLength(inpStrLengthBegin).minLength(inpStrLengthEnd);
+        boolean actualResultWorkMinLength = schema.isValid(curInpString);
+        boolean expectedResultWorkMinLength = false;
+        assertEquals(expectedResultWorkMinLength, actualResultWorkMinLength);
+    }
+    @Test
+    void testStrRepeatCallContains() throws Exception {
+        String curInpString = "hexlet";
+        String curInpSubStringFirst = "hex";
+        String curInpSubStringSecond = "hed";
+        var v = new Validator();
+        var schema = v.string().contains(curInpSubStringFirst).contains(curInpSubStringSecond);
+        boolean actualResultWorkMinLength = schema.isValid(curInpString);
+        boolean expectedResultWorkMinLength = false;
+        assertEquals(expectedResultWorkMinLength, actualResultWorkMinLength);
+    }
 }
