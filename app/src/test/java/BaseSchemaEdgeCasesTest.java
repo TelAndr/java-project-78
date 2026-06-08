@@ -3,6 +3,9 @@ import hexlet.code.Validator;
 import hexlet.code.schemas.StringSchema;
 import org.junit.jupiter.api.Test;
 
+import java.util.*;
+import java.util.function.Predicate;
+
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.testng.Assert.assertEquals;
@@ -39,6 +42,28 @@ public class BaseSchemaEdgeCasesTest {
         var schema = v.string().required().minLength(inpStrLength).contains(curInpSubString);
         int sizeChecksActual = schema.getChecks().size();
         assertEquals(sizeChecksExpected, sizeChecksActual);
+    }
+    @Test
+    void testAccumulateTrueKeysValuesPredicatesChecks() throws Exception {
+        String curInpSubString = "test";
+        final int inpStrLength = 25;
+        final int sizeChecksExpected = 3;
+        Set<String> expectedKeySet = new HashSet<>();
+        expectedKeySet.add("required");
+        expectedKeySet.add("minLength");
+        expectedKeySet.add("contains");
+        List<Predicate<String>> expectedValueList = new ArrayList<>();
+        expectedValueList.add(s -> s != null && !s.isEmpty());
+        expectedValueList.add(s -> s != null && s.length() >= inpStrLength);
+        expectedValueList.add(s -> s != null && s.contains(curInpSubString));
+        var v = new Validator();
+        var schema = v.string().required().minLength(inpStrLength).contains(curInpSubString);
+        Set<String> actualKeySet = schema.getChecks().keySet();
+        List<Predicate<String>> actualValueList = new ArrayList<>(schema.getChecks().values());
+        boolean equalKeys = expectedKeySet.equals(actualKeySet);
+        boolean equalValues = expectedValueList.equals(actualValueList);
+        assertTrue(equalKeys);
+        assertTrue(equalValues);
     }
     @Test
     void testNotEmptyTrueMinLengthFalseContains() throws Exception {
