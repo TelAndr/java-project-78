@@ -72,6 +72,7 @@ public class BaseSchemaEdgeCasesTest {
     void testAccumulateTrueKeysValuesPredicatesChecks() {
         String curInpSubString = "test";
         final int inpStrLength = 10;
+        final int sizeChecks = 3;
         Set expectedKeySet = new HashSet<>();
         expectedKeySet.add("required");
         expectedKeySet.add("minLength");
@@ -80,7 +81,7 @@ public class BaseSchemaEdgeCasesTest {
         var schema = v.string().required().minLength(inpStrLength).contains(curInpSubString);
         Set actualKeySet = schema.getChecks().keySet();
         assertEquals(expectedKeySet, actualKeySet);
-        assertEquals(3, schema.getChecks().size());
+        assertEquals(sizeChecks, schema.getChecks().size());
         assertTrue(schema.getChecks().get("required").test("hello"));
         assertFalse(schema.getChecks().get("required").test(""));
         assertTrue(schema.getChecks().get("minLength").test("This is a long string"));
