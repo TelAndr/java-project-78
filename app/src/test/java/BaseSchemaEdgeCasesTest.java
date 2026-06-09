@@ -71,7 +71,7 @@ public class BaseSchemaEdgeCasesTest {
     @Test
     void testAccumulateTrueKeysValuesPredicatesChecks() {
         String curInpSubString = "test";
-        final int inpStrLength = 25;
+        final int inpStrLength = 10;
         Set expectedKeySet = new HashSet<>();
         expectedKeySet.add("required");
         expectedKeySet.add("minLength");
