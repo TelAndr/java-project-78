@@ -3,7 +3,10 @@ import hexlet.code.Validator;
 import hexlet.code.schemas.StringSchema;
 import org.junit.jupiter.api.Test;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 import java.util.function.Predicate;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -43,27 +46,47 @@ public class BaseSchemaEdgeCasesTest {
         int sizeChecksActual = schema.getChecks().size();
         assertEquals(sizeChecksExpected, sizeChecksActual);
     }
+    //@Test
+    //void testAccumulateTrueKeysValuesPredicatesChecks() throws Exception {
+    //    String curInpSubString = "test";
+    //    final int inpStrLength = 25;
+    //    final int sizeChecksExpected = 3;
+    //    Set<String> expectedKeySet = new HashSet<>();
+    //    expectedKeySet.add("required");
+    //    expectedKeySet.add("minLength");
+    //    expectedKeySet.add("contains");
+    //    List<Predicate<String>> expectedValueList = new ArrayList<>();
+    //    expectedValueList.add(s -> s != null && !s.isEmpty());
+    //    expectedValueList.add(s -> s != null && s.length() >= inpStrLength);
+    //    expectedValueList.add(s -> s != null && s.contains(curInpSubString));
+    //    var v = new Validator();
+    //    var schema = v.string().required().minLength(inpStrLength).contains(curInpSubString);
+    //    Set<String> actualKeySet = schema.getChecks().keySet();
+    //    List<Predicate<String>> actualValueList = new ArrayList<>(schema.getChecks().values());
+    //    boolean equalKeys = expectedKeySet.equals(actualKeySet);
+    //    boolean equalValues = expectedValueList.equals(actualValueList);
+    //    assertTrue(equalKeys);
+    //    assertTrue(equalValues);
+    //}
     @Test
-    void testAccumulateTrueKeysValuesPredicatesChecks() throws Exception {
+    void testAccumulateTrueKeysValuesPredicatesChecks() {
         String curInpSubString = "test";
         final int inpStrLength = 25;
-        final int sizeChecksExpected = 3;
-        Set<String> expectedKeySet = new HashSet<>();
+        Set expectedKeySet = new HashSet<>();
         expectedKeySet.add("required");
         expectedKeySet.add("minLength");
         expectedKeySet.add("contains");
-        List<Predicate<String>> expectedValueList = new ArrayList<>();
-        expectedValueList.add(s -> s != null && !s.isEmpty());
-        expectedValueList.add(s -> s != null && s.length() >= inpStrLength);
-        expectedValueList.add(s -> s != null && s.contains(curInpSubString));
         var v = new Validator();
         var schema = v.string().required().minLength(inpStrLength).contains(curInpSubString);
-        Set<String> actualKeySet = schema.getChecks().keySet();
-        List<Predicate<String>> actualValueList = new ArrayList<>(schema.getChecks().values());
-        boolean equalKeys = expectedKeySet.equals(actualKeySet);
-        boolean equalValues = expectedValueList.equals(actualValueList);
-        assertTrue(equalKeys);
-        assertTrue(equalValues);
+        Set actualKeySet = schema.getChecks().keySet();
+        assertEquals(expectedKeySet, actualKeySet);
+        assertEquals(3, schema.getChecks().size());
+        assertTrue(schema.getChecks().get("required").test("hello"));
+        assertFalse(schema.getChecks().get("required").test(""));
+        assertTrue(schema.getChecks().get("minLength").test("This is a long string"));
+        assertFalse(schema.getChecks().get("minLength").test("short"));
+        assertTrue(schema.getChecks().get("contains").test("this is test string"));
+        assertFalse(schema.getChecks().get("contains").test("this is sample string"));
     }
     @Test
     void testNotEmptyTrueMinLengthFalseContains() throws Exception {
@@ -130,12 +153,12 @@ public class BaseSchemaEdgeCasesTest {
     @Test
     void testStrRepeatCallMinLength() throws Exception {
         String curInpString = "hexlet";
-        final int inpStrLengthBegin = 6;
+        final int inpStrLengthBegin = 8;
         final int inpStrLengthEnd = 3;
         var v = new Validator();
         var schema = v.string().minLength(inpStrLengthBegin).minLength(inpStrLengthEnd);
         boolean actualResultWorkMinLength = schema.isValid(curInpString);
-        boolean expectedResultWorkMinLength = false;
+        boolean expectedResultWorkMinLength = true;
         assertEquals(expectedResultWorkMinLength, actualResultWorkMinLength);
     }
     @Test
