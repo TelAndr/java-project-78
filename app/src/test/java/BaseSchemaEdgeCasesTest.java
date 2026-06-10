@@ -173,4 +173,32 @@ public class BaseSchemaEdgeCasesTest {
         boolean expectedResultWorkMinLength = false;
         assertEquals(expectedResultWorkMinLength, actualResultWorkMinLength);
     }
+    // Сценарий: в схеме есть проверка, которая приведёт к ClassCastException,
+    // если в isValid передать объект не того типа -> ожидаем false.
+    @Test
+    void checkThrowsClassCastException() {
+        StringSchema schema = new StringSchema(String.class);
+        // добавим проверку, которая явно ожидает String и вызывает методы String
+        schema.minLength(1);
+        // Передаём объект другого типа (например, Integer) — в проверке произойдёт ClassCastException
+        Object wrongTypeValue = 123;
+        boolean result = schema.isValid(wrongTypeValue);
+        assertFalse(result);
+    }
+    // Дополнительный сценарий: required() добавляет проверку, которая тоже бросит ClassCastException
+    @Test
+    void requiredCheckThrowsClassCastException() {
+        StringSchema schema = new StringSchema(String.class);
+        schema.required(); // добавляет проверку, использующую s.isEmpty()
+        Object wrongTypeValue = new Object();
+        boolean result = schema.isValid(wrongTypeValue);
+        assertFalse(result);
+    }
+    // Сценарий: если передать null и required=false => true (контроль, что не все false)
+    @Test
+    void forNullWhenNotRequired() {
+        StringSchema schema = new StringSchema(String.class);
+        boolean result = schema.isValid(null);
+        assertTrue(result);
+    }
 }
