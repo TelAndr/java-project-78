@@ -181,7 +181,7 @@ public class BaseSchemaEdgeCasesTest {
         // добавим проверку, которая явно ожидает String и вызывает методы String
         schema.minLength(1);
         // Передаём объект другого типа (например, Integer) — в проверке произойдёт ClassCastException
-        Object wrongTypeValue = 123;
+        final Object wrongTypeValue = 123;
         boolean result = schema.isValid(wrongTypeValue);
         assertFalse(result);
     }
