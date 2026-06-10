@@ -201,4 +201,13 @@ public class BaseSchemaEdgeCasesTest {
         boolean result = schema.isValid(null);
         assertTrue(result);
     }
+    @Test
+    void testCheckRequiredRowSpace() {
+        String curInpString = " ";
+        var v = new Validator();
+        var schema = v.string().required();
+        boolean actualResultWorkRequired = schema.isValid(curInpString);
+        boolean expectedResultWorkRequired = true;
+        assertEquals(expectedResultWorkRequired, actualResultWorkRequired);
+    }
 }
