@@ -210,4 +210,14 @@ public class BaseSchemaEdgeCasesTest {
         boolean expectedResultWorkRequired = true;
         assertEquals(expectedResultWorkRequired, actualResultWorkRequired);
     }
+    @Test
+    void testCheckMinLengthRequiredFalseEmptyInput() {
+        String curInpString = "";
+        final int inpStrLength = 0;
+        var v = new Validator();
+        var schema = v.string().minLength(inpStrLength);
+        boolean actualResultWorkRequired = schema.isValid(curInpString);
+        boolean expectedResultWorkRequired = true;
+        assertEquals(expectedResultWorkRequired, actualResultWorkRequired);
+    }
 }
