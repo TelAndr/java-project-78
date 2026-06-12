@@ -177,9 +177,11 @@ public class BaseSchemaEdgeCasesTest {
     // если в isValid передать объект не того типа -> ожидаем false.
     @Test
     void checkThrowsClassCastException() {
-        StringSchema schema = new StringSchema(String.class);
+        var v = new Validator();
+        //StringSchema schema = new StringSchema(String.class);
         // добавим проверку, которая явно ожидает String и вызывает методы String
-        schema.minLength(1);
+        var schema = v.string().minLength(1);
+        //schema.minLength(1);
         // Передаём объект другого типа (например, Integer) — в проверке произойдёт ClassCastException
         final Object wrongTypeValue = 123;
         boolean result = schema.isValid(wrongTypeValue);
@@ -188,8 +190,10 @@ public class BaseSchemaEdgeCasesTest {
     // Дополнительный сценарий: required() добавляет проверку, которая тоже бросит ClassCastException
     @Test
     void requiredCheckThrowsClassCastException() {
-        StringSchema schema = new StringSchema(String.class);
-        schema.required(); // добавляет проверку, использующую s.isEmpty()
+        var v = new Validator();
+        //StringSchema schema = new StringSchema(String.class);
+        var schema = v.string().required();
+        //schema.required(); // добавляет проверку, использующую s.isEmpty()
         Object wrongTypeValue = new Object();
         boolean result = schema.isValid(wrongTypeValue);
         assertFalse(result);
@@ -197,7 +201,9 @@ public class BaseSchemaEdgeCasesTest {
     // Сценарий: если передать null и required=false => true (контроль, что не все false)
     @Test
     void forNullWhenNotRequired() {
-        StringSchema schema = new StringSchema(String.class);
+        var v = new Validator();
+        //StringSchema schema = new StringSchema(String.class);
+        var schema = v.string();
         boolean result = schema.isValid(null);
         assertTrue(result);
     }
@@ -219,5 +225,16 @@ public class BaseSchemaEdgeCasesTest {
         boolean actualResultWorkRequired = schema.isValid(curInpString);
         boolean expectedResultWorkRequired = true;
         assertEquals(expectedResultWorkRequired, actualResultWorkRequired);
+    }
+    @Test
+    void testNotEmptyTrueContainsFalseMinLength() throws Exception {
+        String curInpString = "This is test string";
+        String curInpSubString = "test";
+        final int inpStrLength = 15;
+        var v = new Validator();
+        var schema = v.string().contains(curInpSubString).minLength(inpStrLength);
+        boolean actualResultWorkRequiredMinLengthContains = schema.isValid(curInpString);
+        boolean expectedResultWorkRequiredMinLengthContains = false;
+        assertEquals(expectedResultWorkRequiredMinLengthContains, actualResultWorkRequiredMinLengthContains);
     }
 }
