@@ -229,8 +229,8 @@ public class BaseSchemaEdgeCasesTest {
     @Test
     void testNotEmptyTrueContainsFalseMinLength() throws Exception {
         String curInpString = "This is test string";
-        String curInpSubString = "test";
-        final int inpStrLength = 15;
+        String curInpSubString = "tess";
+        final int inpStrLength = 19;
         var v = new Validator();
         var schema = v.string().contains(curInpSubString).minLength(inpStrLength);
         boolean actualResultWorkRequiredMinLengthContains = schema.isValid(curInpString);
