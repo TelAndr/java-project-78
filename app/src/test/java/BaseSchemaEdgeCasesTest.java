@@ -178,10 +178,8 @@ public class BaseSchemaEdgeCasesTest {
     @Test
     void checkThrowsClassCastException() {
         var v = new Validator();
-        //StringSchema schema = new StringSchema(String.class);
         // добавим проверку, которая явно ожидает String и вызывает методы String
         var schema = v.string().minLength(1);
-        //schema.minLength(1);
         // Передаём объект другого типа (например, Integer) — в проверке произойдёт ClassCastException
         final Object wrongTypeValue = 123;
         boolean result = schema.isValid(wrongTypeValue);
