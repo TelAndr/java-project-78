@@ -128,6 +128,15 @@ public class NumberSchemaTest {
         assertEquals(expectedResultWorkZeroValue, actualResultWorkZeroValue);
     }
     @Test
+    void testInpMinPozValue() throws Exception {
+        int curInpNum = 1;
+        var v = new Validator();
+        var schema = v.number().positive();
+        boolean actualResultWorkZeroValue = schema.isValid(curInpNum);
+        boolean expectedResultWorkZeroValue = true;
+        assertEquals(expectedResultWorkZeroValue, actualResultWorkZeroValue);
+    }
+    @Test
     void testInpPositiveValue() throws Exception {
         final int curInpNum = 10;
         var v = new Validator();
