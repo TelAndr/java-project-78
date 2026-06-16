@@ -181,4 +181,35 @@ public class NumberSchemaTest {
         boolean expectedResultWorkRequired = true;
         assertEquals(expectedResultWorkRequired, actualResultWorkRequired);
     }
+    @Test
+    void testInpRequiredPositiveValue() throws Exception {
+        final int curInpNum = 10;
+        var v = new Validator();
+        var schema = v.number().required().positive();
+        boolean actualResultWorkPositiveValue = schema.isValid(curInpNum);
+        boolean expectedResultWorkPositiveValue = true;
+        assertEquals(expectedResultWorkPositiveValue, actualResultWorkPositiveValue);
+    }
+    @Test
+    void testInpRequiredRangeValue() throws Exception {
+        final int curInpNum = 20;
+        final int valLowerRange = 15;
+        final int valUpperRange = 25;
+        var v = new Validator();
+        var schema = v.number().required().range(valLowerRange, valUpperRange);
+        boolean actualResultWorkUpperMaxValue = schema.isValid(curInpNum);
+        boolean expectedResultWorkUpperMaxValue = true;
+        assertEquals(expectedResultWorkUpperMaxValue, actualResultWorkUpperMaxValue);
+    }
+    @Test
+    void testInpPositiveRangeValue() throws Exception {
+        final int curInpNum = 20;
+        final int valLowerRange = 15;
+        final int valUpperRange = 25;
+        var v = new Validator();
+        var schema = v.number().positive().range(valLowerRange, valUpperRange);
+        boolean actualResultWorkUpperMaxValue = schema.isValid(curInpNum);
+        boolean expectedResultWorkUpperMaxValue = true;
+        assertEquals(expectedResultWorkUpperMaxValue, actualResultWorkUpperMaxValue);
+    }
 }
