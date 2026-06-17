@@ -212,4 +212,28 @@ public class NumberSchemaTest {
         boolean expectedResultWorkUpperMaxValue = true;
         assertEquals(expectedResultWorkUpperMaxValue, actualResultWorkUpperMaxValue);
     }
+    @Test
+    void testInpRequiredPositiveRangeValue() throws Exception {
+        final int curInpNum = 20;
+        final int valLowerRange = 15;
+        final int valUpperRange = 25;
+        var v = new Validator();
+        var schema = v.number().required().positive().range(valLowerRange, valUpperRange);
+        boolean actualResultWorkUpperMaxValue = schema.isValid(curInpNum);
+        boolean expectedResultWorkUpperMaxValue = true;
+        assertEquals(expectedResultWorkUpperMaxValue, actualResultWorkUpperMaxValue);
+    }
+    @Test
+    void testInpRepeatRangeValue() throws Exception {
+        final int curInpNum = 15;
+        final int valLowerRangeOne = 10;
+        final int valUpperRangeOne = 20;
+        final int valLowerRangeTwo = 30;
+        final int valUpperRangeTwo = 40;
+        var v = new Validator();
+        var schema = v.number().range(valLowerRangeOne, valUpperRangeOne).range(valLowerRangeTwo, valUpperRangeTwo);
+        boolean actualResultWorkUpperMaxValue = schema.isValid(curInpNum);
+        boolean expectedResultWorkUpperMaxValue = false;
+        assertEquals(expectedResultWorkUpperMaxValue, actualResultWorkUpperMaxValue);
+    }
 }
