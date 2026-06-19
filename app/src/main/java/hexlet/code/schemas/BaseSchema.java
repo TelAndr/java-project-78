@@ -64,11 +64,7 @@ public abstract class BaseSchema<T> {
             return false;
         }
         for (Predicate<T> check : checks.values()) {
-            try {
-                if (!check.test((T) value)) {
-                    return false;
-                }
-            } catch (ClassCastException e) {
+            if (!check.test((T) value)) {
                 return false;
             }
         }
