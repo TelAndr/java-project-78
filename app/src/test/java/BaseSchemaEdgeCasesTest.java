@@ -110,6 +110,15 @@ public class BaseSchemaEdgeCasesTest {
         assertEquals(expectedResultWorkRequired, actualResultWorkRequired);
     }
     @Test
+    void testErrorObjectTypeInput() throws Exception {
+        final Object curCharValue = 'c';
+        var v = new Validator();
+        var schema = v.string().required();
+        boolean actualResultWorkRequired = schema.isValid(curCharValue);
+        boolean expectedResultWorkRequired = false;
+        assertEquals(expectedResultWorkRequired, actualResultWorkRequired);
+    }
+    @Test
     void testCheckSetGetValueRequired() throws Exception {
         var v = new Validator();
         var schema = v.string();
