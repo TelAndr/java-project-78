@@ -236,4 +236,40 @@ public class NumberSchemaTest {
         boolean expectedResultWorkUpperMaxValue = false;
         assertEquals(expectedResultWorkUpperMaxValue, actualResultWorkUpperMaxValue);
     }
+    @Test
+    void testInpRepeatPositiveValue() throws Exception {
+        final int curInpNum = 15;
+        var v = new Validator();
+        var schema = v.number().positive().positive();
+        boolean actualResultWorkUpperMaxValue = schema.isValid(curInpNum);
+        boolean expectedResultWorkUpperMaxValue = true;
+        assertEquals(expectedResultWorkUpperMaxValue, actualResultWorkUpperMaxValue);
+    }
+    @Test
+    void testInpRequiredNotNullValue() throws Exception {
+        final int curInpNum = 15;
+        var v = new Validator();
+        var schema = v.number().required();
+        boolean actualResultWorkUpperMaxValue = schema.isValid(curInpNum);
+        boolean expectedResultWorkUpperMaxValue = true;
+        assertEquals(expectedResultWorkUpperMaxValue, actualResultWorkUpperMaxValue);
+    }
+    @Test
+    void testInpNotCorrectTypeStringNotRequiredValue() throws Exception {
+        final String curInpValue = "10";
+        var v = new Validator();
+        var schema = v.number();
+        boolean actualResultWorkUpperMaxValue = schema.isValid(curInpValue);
+        boolean expectedResultWorkUpperMaxValue = false;
+        assertEquals(expectedResultWorkUpperMaxValue, actualResultWorkUpperMaxValue);
+    }
+    @Test
+    void testInpNotCorrectTypeObjectNotRequiredValue() throws Exception {
+        final double curInpValue = 10.5;
+        var v = new Validator();
+        var schema = v.number();
+        boolean actualResultWorkUpperMaxValue = schema.isValid(curInpValue);
+        boolean expectedResultWorkUpperMaxValue = false;
+        assertEquals(expectedResultWorkUpperMaxValue, actualResultWorkUpperMaxValue);
+    }
 }
