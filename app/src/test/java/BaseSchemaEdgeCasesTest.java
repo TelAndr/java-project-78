@@ -1,5 +1,6 @@
 //import hexlet.code.schemas.BaseSchema;
 import hexlet.code.Validator;
+import hexlet.code.schemas.NumberSchema;
 import hexlet.code.schemas.StringSchema;
 import org.junit.jupiter.api.Test;
 
@@ -243,5 +244,26 @@ public class BaseSchemaEdgeCasesTest {
         boolean actualResultWorkRequiredMinLengthContains = schema.isValid(curInpString);
         boolean expectedResultWorkRequiredMinLengthContains = false;
         assertEquals(expectedResultWorkRequiredMinLengthContains, actualResultWorkRequiredMinLengthContains);
+    }
+    @Test
+    void classCastExceptionNumberHandled() {
+        // создаём StringSchema, но передаём Integer - проверяем, что не выбрасывается исключение, а возвращается false
+        final String strValCheck = "123";
+        NumberSchema schema = new NumberSchema(Integer.class).positive();
+        assertFalse(schema.isValid(strValCheck)); // должен вернуть false, не бросать
+    }
+    @Test
+    void nullAndNotRequiredNumberBehavior() {
+        NumberSchema schema = new NumberSchema(Integer.class);
+        assertTrue(schema.isValid(null)); // по умолчанию required == false
+    }
+    @Test
+    void testCheckisValidRequiredTrueValueNumberNull() throws Exception {
+        Integer curIntNotEmpty = null;
+        var v = new Validator();
+        var schema = v.number().required();
+        boolean actualResultWorkRequired = schema.isValid(curIntNotEmpty);
+        boolean expectedResultWorkRequired = false;
+        assertEquals(expectedResultWorkRequired, actualResultWorkRequired);
     }
 }
