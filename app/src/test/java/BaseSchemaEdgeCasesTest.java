@@ -266,4 +266,38 @@ public class BaseSchemaEdgeCasesTest {
         boolean expectedResultWorkRequired = false;
         assertEquals(expectedResultWorkRequired, actualResultWorkRequired);
     }
+    @Test
+    void testAccumulateNumberPredicatesChecks() throws Exception {
+        final int valLowerRange = 15;
+        final int valUpperRange = 25;
+        final int sizeChecksExpected = 3;
+        var v = new Validator();
+        var schema = v.number().required().positive().range(valLowerRange, valUpperRange);
+        int sizeChecksActual = schema.getChecks().size();
+        assertEquals(sizeChecksExpected, sizeChecksActual);
+    }
+    @Test
+    void testAccumulateNumberTrueKeysValuesPredicatesChecks() {
+        final int valLowerRange = 15;
+        final int valUpperRange = 25;
+        final int valNumTrueReq = 20;
+        final int valNumFalsePositive = -20;
+        final int valNumFalseRange = 10;
+        final int sizeChecks = 3;
+        Set expectedKeySet = new HashSet<>();
+        expectedKeySet.add("required");
+        expectedKeySet.add("positive");
+        expectedKeySet.add("range");
+        var v = new Validator();
+        var schema = v.number().required().positive().range(valLowerRange, valUpperRange);
+        Set actualKeySet = schema.getChecks().keySet();
+        assertEquals(expectedKeySet, actualKeySet);
+        assertEquals(sizeChecks, schema.getChecks().size());
+        assertTrue(schema.getChecks().get("required").test(valNumTrueReq));
+        assertFalse(schema.getChecks().get("required").test(null));
+        assertTrue(schema.getChecks().get("positive").test(valNumTrueReq));
+        assertFalse(schema.getChecks().get("positive").test(valNumFalsePositive));
+        assertTrue(schema.getChecks().get("range").test(valNumTrueReq));
+        assertFalse(schema.getChecks().get("range").test(valNumFalseRange));
+    }
 }
