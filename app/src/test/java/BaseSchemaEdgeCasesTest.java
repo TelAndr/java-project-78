@@ -1,5 +1,6 @@
 //import hexlet.code.schemas.BaseSchema;
 import hexlet.code.Validator;
+import hexlet.code.schemas.MapSchema;
 import hexlet.code.schemas.NumberSchema;
 import hexlet.code.schemas.StringSchema;
 import org.junit.jupiter.api.Test;
@@ -7,6 +8,7 @@ import org.junit.jupiter.api.Test;
 //import java.util.ArrayList;
 import java.util.HashSet;
 //import java.util.List;
+import java.util.Map;
 import java.util.Set;
 //import java.util.function.Predicate;
 
@@ -247,7 +249,7 @@ public class BaseSchemaEdgeCasesTest {
     }
     @Test
     void classCastExceptionNumberHandled() {
-        // создаём StringSchema, но передаём Integer - проверяем, что не выбрасывается исключение, а возвращается false
+        // создаём NumberSchema, но передаём String - проверяем, что не выбрасывается исключение, а возвращается false
         final String strValCheck = "123";
         NumberSchema schema = new NumberSchema(Integer.class).positive();
         assertFalse(schema.isValid(strValCheck)); // должен вернуть false, не бросать
@@ -299,5 +301,27 @@ public class BaseSchemaEdgeCasesTest {
         assertFalse(schema.getChecks().get("positive").test(valNumFalsePositive));
         assertTrue(schema.getChecks().get("range").test(valNumTrueReq));
         assertFalse(schema.getChecks().get("range").test(valNumFalseRange));
+    }
+    @Test
+    void classCastExceptionMapHandled() {
+        // создаём MapSchema, но передаём Integer - проверяем, что не выбрасывается исключение, а возвращается false
+        final int valSizeMap = 3;
+        final int numValCheck = 123;
+        MapSchema schema = new MapSchema(Map.class).sizeof(valSizeMap);
+        assertFalse(schema.isValid(numValCheck)); // должен вернуть false, не бросать
+    }
+    @Test
+    void nullAndNotRequiredMapBehavior() {
+        MapSchema schema = new MapSchema(Map.class);
+        assertTrue(schema.isValid(null)); // по умолчанию required == false
+    }
+    @Test
+    void testCheckisValidRequiredTrueValueMapNull() throws Exception {
+        Map curMapNotEmpty = null;
+        var v = new Validator();
+        var schema = v.map().required();
+        boolean actualResultWorkRequired = schema.isValid(curMapNotEmpty);
+        boolean expectedResultWorkRequired = false;
+        assertEquals(expectedResultWorkRequired, actualResultWorkRequired);
     }
 }
