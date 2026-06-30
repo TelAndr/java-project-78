@@ -380,9 +380,8 @@ public class BaseSchemaEdgeCasesTest {
         final int sizeChecks = 3;
         final int setSizeMap = 3;
         final int valueMinLength = 2;
-        final int minVelocity = 10;
-        final int maxVelocity = 60;
-        final int maxVelocityPlain = 1000;
+        final int valueName = 12;
+        final int numValueAgeTest = 25;
 
         Set expectedKeySet = new HashSet<>();
         expectedKeySet.add("required");
@@ -396,13 +395,13 @@ public class BaseSchemaEdgeCasesTest {
         shapes.put("age", v.number().required().positive());
 
         Map<String, Integer> validData = new HashMap<>();
-        validData.put("name",12); // это намеренно неправильный тип, если хотите проверить type-check — false validData.put("age",25);
-        validData.put("extra",1);
+        validData.put("name", valueName);
+        validData.put("extra", 1);
 
         Map<String, Object> invalidShapeData = new HashMap<>();
         invalidShapeData.put("name", "John");
-        invalidShapeData.put("age",25);
-        invalidShapeData.put("extra",1);
+        invalidShapeData.put("age", numValueAgeTest);
+        invalidShapeData.put("extra", 1);
 
         var schema = v.map().required().sizeof(setSizeMap).shape(shapes);
 
@@ -415,8 +414,8 @@ public class BaseSchemaEdgeCasesTest {
         assertTrue(requiredCheck.test(validData));
         assertFalse(requiredCheck.test(null));
         assertTrue(sizeofCheck.test(validData));
-        assertFalse(sizeofCheck.test(Map.of("name", "John", "age",25)));
+        assertFalse(sizeofCheck.test(Map.of("name", "John", "age", numValueAgeTest)));
         assertTrue(shapeCheck.test(invalidShapeData)); // если name и age валидны
-        assertFalse(shapeCheck.test(Map.of("name", "J", "age",25))); // name короткий
+        assertFalse(shapeCheck.test(Map.of("name", "J", "age", numValueAgeTest))); // name короткий
     }
 }
