@@ -397,7 +397,7 @@ public class BaseSchemaEdgeCasesTest {
         Map<String, Integer> validData = new HashMap<>();
         validData.put("name", valueName);
         validData.put("extra", 1);
-        validData.put("pud",valueName);
+        validData.put("pud", valueName);
 
         Map<String, Object> invalidShapeData = new HashMap<>();
         invalidShapeData.put("name", "John");
