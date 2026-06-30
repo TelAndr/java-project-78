@@ -1,15 +1,18 @@
 //import hexlet.code.schemas.BaseSchema;
 import hexlet.code.Validator;
+import hexlet.code.schemas.BaseSchema;
 import hexlet.code.schemas.MapSchema;
 import hexlet.code.schemas.NumberSchema;
 import hexlet.code.schemas.StringSchema;
 import org.junit.jupiter.api.Test;
 
 //import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 //import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.function.Predicate;
 //import java.util.function.Predicate;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -323,5 +326,97 @@ public class BaseSchemaEdgeCasesTest {
         boolean actualResultWorkRequired = schema.isValid(curMapNotEmpty);
         boolean expectedResultWorkRequired = false;
         assertEquals(expectedResultWorkRequired, actualResultWorkRequired);
+    }
+    @Test
+    void testAccumulateMapPredicatesChecks() throws Exception {
+        final int setSizeMap = 3;
+        final int sizeChecksExpected = 3;
+        final int valueMinLength = 2;
+        var v = new Validator();
+        Map<String, BaseSchema<?>> shapes = new HashMap<>();
+        shapes.put("name", v.string().required().minLength(valueMinLength));
+        shapes.put("age", v.number().required().positive());
+        var schema = v.map().required().sizeof(setSizeMap).shape(shapes);
+        int sizeChecksActual = schema.getChecks().size();
+        assertEquals(sizeChecksExpected, sizeChecksActual);
+    }
+    //@Test
+    //void testAccumulateMapTrueKeysValuesPredicatesChecks() {
+    //    final int sizeChecks = 3;
+    //    final int setSizeMap = 3;
+    //    final int valueMinLength = 2;
+    //    final int minVelocity = 10;
+    //    final int maxVelocity = 60;
+    //    final int maxVelocityPlain = 1000;
+    //    Set expectedKeySet = new HashSet<>();
+    //    expectedKeySet.add("required");
+    //    expectedKeySet.add("sizeof");
+    //    expectedKeySet.add("shape");
+    //    var v = new Validator();
+    //    Map<String, BaseSchema<?>> shapes = new HashMap<>();
+    //    shapes.put("name", v.string().required().minLength(valueMinLength));
+    //    shapes.put("age", v.number().required().positive());
+    //    Map<String, Integer> velocityTransp = new HashMap<>();
+    //    velocityTransp.put("bycicle", minVelocity);
+    //    velocityTransp.put("car", maxVelocity);
+    //    velocityTransp.put("Plain", maxVelocityPlain);
+    //    Map<String, Integer> velocityTranspMod = new HashMap<>();
+    //    velocityTranspMod.put("bycicle", minVelocity);
+    //    velocityTranspMod.put("car", maxVelocity);
+    //    var schema = v.map().required().sizeof(setSizeMap).shape(shapes);
+    //    Set actualKeySet = schema.getChecks().keySet();
+    //    assertEquals(expectedKeySet, actualKeySet);
+    //    assertEquals(sizeChecks, schema.getChecks().size());
+    //    assertTrue(schema.getChecks().get("required").test(velocityTransp));
+    //    assertFalse(schema.getChecks().get("required").test(null));
+    //    assertTrue(schema.getChecks().get("sizeof").test(velocityTransp));
+    //    assertFalse(schema.getChecks().get("sizeof").test(velocityTranspMod));
+    //    assertTrue(schema.getChecks().get("shape").test(shapes));
+    //    assertFalse(schema.getChecks().get("shape").test(shapes));
+    //}
+    @Test
+    void testAccumulateMapTrueKeysValuesPredicatesChecks() {
+
+        final int sizeChecks = 3;
+        final int setSizeMap = 3;
+        final int valueMinLength = 2;
+        final int minVelocity = 10;
+        final int maxVelocity = 60;
+        final int maxVelocityPlain = 1000;
+
+        Set expectedKeySet = new HashSet<>();
+        expectedKeySet.add("required");
+        expectedKeySet.add("sizeof");
+        expectedKeySet.add("shape");
+
+        var v = new Validator();
+
+        Map<String, BaseSchema<?>> shapes = new HashMap<>();
+        shapes.put("name", v.string().required().minLength(valueMinLength));
+        shapes.put("age", v.number().required().positive());
+
+        Map<String, Integer> validData = new HashMap<>();
+        validData.put("name",12); // это намеренно неправильный тип, если хотите проверить type-check — false validData.put("age",25);
+        validData.put("extra",1);
+
+        Map<String, Object> invalidShapeData = new HashMap<>();
+        invalidShapeData.put("name", "John");
+        invalidShapeData.put("age",25);
+        invalidShapeData.put("extra",1);
+
+        var schema = v.map().required().sizeof(setSizeMap).shape(shapes);
+
+        assertEquals(expectedKeySet, schema.getChecks().keySet());
+        assertEquals(sizeChecks, schema.getChecks().size());
+
+        Predicate<Map<?, ?>> requiredCheck = (Predicate<Map<?, ?>>) schema.getChecks().get("required");
+        Predicate<Map<?, ?>> sizeofCheck = (Predicate<Map<?, ?>>) schema.getChecks().get("sizeof");
+        Predicate<Map<?, ?>> shapeCheck = (Predicate<Map<?, ?>>) schema.getChecks().get("shape");
+        assertTrue(requiredCheck.test(validData));
+        assertFalse(requiredCheck.test(null));
+        assertTrue(sizeofCheck.test(validData));
+        assertFalse(sizeofCheck.test(Map.of("name", "John", "age",25)));
+        assertTrue(shapeCheck.test(invalidShapeData)); // если name и age валидны
+        assertFalse(shapeCheck.test(Map.of("name", "J", "age",25))); // name короткий
     }
 }
