@@ -10,7 +10,7 @@ public class NumberSchemaTest {
         String curNumberNull = null;
         var v = new Validator();
         var schema = v.number().required();
-        boolean actualResultWorkRequired = schema.isValid(curNumberNull);
+        boolean actualResultWorkRequired = schema.isValid(Integer.valueOf(curNumberNull));
         boolean expectedResultWorkRequired = false;
         assertEquals(expectedResultWorkRequired, actualResultWorkRequired);
     }
@@ -19,7 +19,7 @@ public class NumberSchemaTest {
         Object curNumberNull = null;
         var v = new Validator();
         var schema = v.number().required();
-        boolean actualResultWorkRequired = schema.isValid(curNumberNull);
+        boolean actualResultWorkRequired = schema.isValid((Integer) curNumberNull);
         boolean expectedResultWorkRequired = false;
         assertEquals(expectedResultWorkRequired, actualResultWorkRequired);
     }
@@ -158,7 +158,7 @@ public class NumberSchemaTest {
         var v = new Validator();
         var schema = v.number().positive();
         boolean actualResultWorkFirstValue = schema.isValid(curInpNumFirst);
-        boolean actualResultWorkSecondValue = schema.isValid(curInpNumSecond);
+        boolean actualResultWorkSecondValue = schema.isValid(Integer.valueOf(curInpNumSecond));
         boolean actualResultWorkThirdValue = schema.isValid(curInpNumThird);
         boolean expectedResultWorkThirdValue = true;
         assertEquals(expectedResultWorkThirdValue, actualResultWorkThirdValue);
@@ -168,7 +168,7 @@ public class NumberSchemaTest {
         String curInpValue = "Not number";
         var v = new Validator();
         var schema = v.number().positive();
-        boolean actualResultWorkNotNumberValue = schema.isValid(curInpValue);
+        boolean actualResultWorkNotNumberValue = schema.isValid(Integer.valueOf(curInpValue));
         boolean expectedResultWorkNotNumberValue = false;
         assertEquals(expectedResultWorkNotNumberValue, actualResultWorkNotNumberValue);
     }
@@ -259,7 +259,7 @@ public class NumberSchemaTest {
         final String curInpValue = "10";
         var v = new Validator();
         var schema = v.number();
-        boolean actualResultWorkUpperMaxValue = schema.isValid(curInpValue);
+        boolean actualResultWorkUpperMaxValue = schema.isValid(Integer.valueOf(curInpValue));
         boolean expectedResultWorkUpperMaxValue = false;
         assertEquals(expectedResultWorkUpperMaxValue, actualResultWorkUpperMaxValue);
     }
@@ -268,7 +268,7 @@ public class NumberSchemaTest {
         final double curInpValue = 10.5;
         var v = new Validator();
         var schema = v.number();
-        boolean actualResultWorkUpperMaxValue = schema.isValid(curInpValue);
+        boolean actualResultWorkUpperMaxValue = schema.isValid((int) curInpValue);
         boolean expectedResultWorkUpperMaxValue = false;
         assertEquals(expectedResultWorkUpperMaxValue, actualResultWorkUpperMaxValue);
     }
