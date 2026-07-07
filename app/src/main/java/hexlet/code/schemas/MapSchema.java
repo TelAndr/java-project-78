@@ -5,8 +5,8 @@ import java.util.HashMap;
 
 //public class MapSchema<T> {
 //public class MapSchema<SELF extends MapSchema<SELF>> {
-public class MapSchema<K, SELF extends MapSchema<K, SELF>> extends BaseSchema<Map<?, ?>> {
-    public MapSchema(Class<Map<?, ?>> typeClass) {
+public class MapSchema<K, SELF extends MapSchema<K, SELF>> extends BaseSchema<Map<K, ?>> {
+    public MapSchema(Class<Map<K, ?>> typeClass) {
         super(typeClass);
     }
 
@@ -49,20 +49,18 @@ public class MapSchema<K, SELF extends MapSchema<K, SELF>> extends BaseSchema<Ma
      * @param mapSchemas входной Map для задания схемы валидации входного значения
      * @return значение типа исходного класса.
      */
-    public SELF shape(Map<K, BaseSchema<?>> mapSchemas) {
-        if (mapSchemas != null) {
-            this.propertySchemas.putAll(mapSchemas);
-        }
+    public SELF shape(Map<K, BaseSchema<Object>> mapSchemas) {
+        Map<K, BaseSchema<?>> snapshot = new HashMap<>(mapSchemas);
         // добавим предикат, который проверяет каждое свойство по соответствующей схеме
         addCheck("shape", m -> {
             if (m == null) {
                 return true; // если null — оставляем на required
             }
-            for (Map.Entry<K, BaseSchema<?>> entry : propertySchemas.entrySet()) {
-                Object key = entry.getKey();
+            for (Map.Entry<K, BaseSchema<?>> entry : snapshot.entrySet()) {
+                K key = entry.getKey();
                 BaseSchema<?> schema = entry.getValue();
                 Object value = m.get(key);
-                if (!schema.isValid(value)) {
+                if (!((BaseSchema) schema).isValid(value)) {
                     return false;
                 }
             }
@@ -70,7 +68,5 @@ public class MapSchema<K, SELF extends MapSchema<K, SELF>> extends BaseSchema<Ma
         });
         return self();
     }
-    private Map<K, BaseSchema<?>> propertySchemas = new HashMap<>();
-
 }
 
