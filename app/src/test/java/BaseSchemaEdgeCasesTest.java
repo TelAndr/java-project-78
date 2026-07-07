@@ -26,7 +26,7 @@ public class BaseSchemaEdgeCasesTest {
         final int valMinLength = 1;
         final int numValCheck = 123;
         StringSchema schema = new StringSchema(String.class).minLength(valMinLength);
-        assertFalse(schema.isValid(numValCheck)); // должен вернуть false, не бросать
+        assertFalse(schema.isValid(String.valueOf(numValCheck))); // должен вернуть false, не бросать
     }
     @Test
     void nullAndNotRequiredBehavior() {
@@ -52,28 +52,6 @@ public class BaseSchemaEdgeCasesTest {
         int sizeChecksActual = schema.getChecks().size();
         assertEquals(sizeChecksExpected, sizeChecksActual);
     }
-    //@Test
-    //void testAccumulateTrueKeysValuesPredicatesChecks() throws Exception {
-    //    String curInpSubString = "test";
-    //    final int inpStrLength = 25;
-    //    final int sizeChecksExpected = 3;
-    //    Set<String> expectedKeySet = new HashSet<>();
-    //    expectedKeySet.add("required");
-    //    expectedKeySet.add("minLength");
-    //    expectedKeySet.add("contains");
-    //    List<Predicate<String>> expectedValueList = new ArrayList<>();
-    //    expectedValueList.add(s -> s != null && !s.isEmpty());
-    //    expectedValueList.add(s -> s != null && s.length() >= inpStrLength);
-    //    expectedValueList.add(s -> s != null && s.contains(curInpSubString));
-    //    var v = new Validator();
-    //    var schema = v.string().required().minLength(inpStrLength).contains(curInpSubString);
-    //    Set<String> actualKeySet = schema.getChecks().keySet();
-    //    List<Predicate<String>> actualValueList = new ArrayList<>(schema.getChecks().values());
-    //    boolean equalKeys = expectedKeySet.equals(actualKeySet);
-    //    boolean equalValues = expectedValueList.equals(actualValueList);
-    //    assertTrue(equalKeys);
-    //    assertTrue(equalValues);
-    //}
     @Test
     void testAccumulateTrueKeysValuesPredicatesChecks() {
         String curInpSubString = "test";
@@ -111,7 +89,7 @@ public class BaseSchemaEdgeCasesTest {
         final int curIntValue = 15;
         var v = new Validator();
         var schema = v.string().required();
-        boolean actualResultWorkRequired = schema.isValid(curIntValue);
+        boolean actualResultWorkRequired = schema.isValid(String.valueOf(curIntValue));
         boolean expectedResultWorkRequired = false;
         assertEquals(expectedResultWorkRequired, actualResultWorkRequired);
     }
@@ -120,7 +98,7 @@ public class BaseSchemaEdgeCasesTest {
         final Object curCharValue = 'c';
         var v = new Validator();
         var schema = v.string().required();
-        boolean actualResultWorkRequired = schema.isValid(curCharValue);
+        boolean actualResultWorkRequired = schema.isValid((String) curCharValue);
         boolean expectedResultWorkRequired = false;
         assertEquals(expectedResultWorkRequired, actualResultWorkRequired);
     }
@@ -197,7 +175,7 @@ public class BaseSchemaEdgeCasesTest {
         var schema = v.string().minLength(1);
         // Передаём объект другого типа (например, Integer) — в проверке произойдёт ClassCastException
         final Object wrongTypeValue = 123;
-        boolean result = schema.isValid(wrongTypeValue);
+        boolean result = schema.isValid((String) wrongTypeValue);
         assertFalse(result);
     }
     // Дополнительный сценарий: required() добавляет проверку, которая тоже бросит ClassCastException
@@ -208,7 +186,7 @@ public class BaseSchemaEdgeCasesTest {
         var schema = v.string().required();
         //schema.required(); // добавляет проверку, использующую s.isEmpty()
         Object wrongTypeValue = new Object();
-        boolean result = schema.isValid(wrongTypeValue);
+        boolean result = schema.isValid((String) wrongTypeValue);
         assertFalse(result);
     }
     // Сценарий: если передать null и required=false => true (контроль, что не все false)
@@ -255,7 +233,7 @@ public class BaseSchemaEdgeCasesTest {
         // создаём NumberSchema, но передаём String - проверяем, что не выбрасывается исключение, а возвращается false
         final String strValCheck = "123";
         NumberSchema schema = new NumberSchema(Integer.class).positive();
-        assertFalse(schema.isValid(strValCheck)); // должен вернуть false, не бросать
+        assertFalse(schema.isValid(Integer.valueOf(strValCheck))); // должен вернуть false, не бросать
     }
     @Test
     void nullAndNotRequiredNumberBehavior() {
